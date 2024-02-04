@@ -26,6 +26,11 @@ class Location
         $this->infos = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getPosition();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
