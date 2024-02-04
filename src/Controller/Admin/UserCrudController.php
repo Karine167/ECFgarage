@@ -39,10 +39,10 @@ class UserCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id')->hideOnForm(),
             EmailField::new('email'),
-            TextField::new('firstname'),
-            TextField::new('lastname'),
-            TextField::new('telephon'),
-            TextField::new('address'),
+            TextField::new('firstname', 'Prénom'),
+            TextField::new('lastname', 'Nom'),
+            TextField::new('telephon', 'téléphone :'),
+            TextField::new('address', 'adresse'),
             ChoiceField::new('roles')
             ->setChoices(['ROLE_ADMIN'=> 'ROLE_ADMIN','ROLE_EMPLOYEE'=> 'ROLE_EMPLOYEE'])
             ->allowMultipleChoices()
@@ -53,8 +53,8 @@ class UserCrudController extends AbstractCrudController
             ->setFormType(RepeatedType::class)
             ->setFormTypeOptions([
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => '(Reapeat)'],
+                'first_options' => ['label' => 'Entrer un mot de passe'],
+                'second_options' => ['label' => 'Confirmer votre mot de passe'],
                 'mapped' => false,
             ])
             ->setRequired($pageName === Crud::PAGE_NEW)
