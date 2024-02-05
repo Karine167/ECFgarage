@@ -5,3 +5,13 @@ body {
     width:2.5em;
     height:2.5em;
 }
+
+.nav-link {
+    border: solid 1.5px #7391C8;
+    margin: 0.2em;
+    width: auto;
+    height: 4em;
+}
+.nav-link:hover{
+    background-color: #7391C8;
+}
