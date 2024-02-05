@@ -23,11 +23,12 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('ECFGarageParrot');
+            ->setTitle('GarageParrot');
     }
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToRoute('Accueil', 'fa-solid fa-house-user', 'app_home');
         yield MenuItem::linkToDashboard('Tableau de bord', 'fa fa-home');
         yield MenuItem::linkToCrud('Employés', 'fas fa-user-tie', User::class)
         ->setPermission('ROLE_ADMIN');
