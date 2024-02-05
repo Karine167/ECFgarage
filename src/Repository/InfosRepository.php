@@ -21,6 +21,22 @@ class InfosRepository extends ServiceEntityRepository
         parent::__construct($registry, Infos::class);
     }
 
+    /**
+    * @return Infos[] Returns an array of Infos objects
+    * recherche du fichier contenant le logo 
+    */
+    public function findImageLogo(): string
+    {
+        $logo = $this->createQueryBuilder('i')
+            ->andWhere('i.label = :val')
+            ->setParameter('val', 'Logo')
+            ->getQuery()
+            ->getResult()
+        ;
+        return $logo[0]->getImageName();
+    }
+
+
 //    /**
 //     * @return Infos[] Returns an array of Infos objects
 //     */

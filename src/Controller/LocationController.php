@@ -68,6 +68,10 @@ class LocationController extends AbstractController
         $location14 = new Location();
         $location14->setPosition('info4D');
         $em->persist($location14);
+
+        $location15 = new Location();
+        $location15->setPosition('logo');
+        $em->persist($location15);
         
         $em->flush();
         return new Response('saved new locations');
