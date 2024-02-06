@@ -1,4 +1,4 @@
-<footer class="border-top px-3 row position-absolute bottom-0">
+<footer class="border-top px-3 row ">
     <div class="col-6">
         <div class="scheduleM d-lg-none">
             <h6>{{scheduleM.titleM}}</h6>
@@ -10,8 +10,14 @@
         </div>
     </div>
     <div class="col-6">
-        <h6>Nous contacter</h6>
-        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <div class="contactM d-lg-none">
+            <h6>{{contactM.titleM}}</h6>
+            <p>{{contactM.contentM|raw}}</p>
+        </div>
+        <div class="contactD d-none d-lg-block">
+            <h6>{{contactD.titleD}}</h6>
+            <p>{{contactD.contentD|raw}}</p>
+        </div> 
         <a href="#" >
         Formulaire de contact
         </a>

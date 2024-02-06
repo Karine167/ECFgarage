@@ -74,7 +74,46 @@ class InfosRepository extends ServiceEntityRepository
         ];
     }
 
+    /**
+    * @return Infos[] Returns an array of Infos objects
+    * recherche du fichier contenant les informations de contact pour la version mobile
+    */
+    public function getContactM():array
+    {
+        $infosContact = $this->findBy(['location' => 5]);
+        foreach ($infosContact as $contact){
+            if (!($contact->isHide())){
+                $titleM = $contact->getLabel();
+                $contentM = $contact->getContent();
+            }
+        }
 
+        return  [
+            'titleM' => $titleM,
+            'contentM' => $contentM
+        ];
+    }
+
+    /**
+    * @return Infos[] Returns an array of Infos objects
+    * recherche du fichier contenant les informations de contact pour la version Desktop
+    */
+    public function getContactD():array
+    {
+        $infosContact = $this->findBy(['location' => 6 ]);
+        dump($infosContact);
+        foreach ($infosContact as $contact){
+            if (!($contact->isHide())){
+                $titleD = $contact->getLabel();
+                $contentD = $contact->getContent();
+            }
+        }
+
+        return  [
+            'titleD' => $titleD,
+            'contentD' => $contentD
+        ];
+    }
 
 
     //   /**

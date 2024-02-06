@@ -20,11 +20,15 @@ class HomeController extends AbstractController
         //recherche des horaires
         $scheduleM = $infosRepository->getScheduleM();
         $scheduleD = $infosRepository->getScheduleD();
+        $contactM = $infosRepository->getContactM();
+        $contactD = $infosRepository->getContactD();
         return $this->render('home/index.html.twig', [
             'director' => 'Vincent Parrot',
             'imgPath' => $imgPath,
             'scheduleM' => $scheduleM,
             'scheduleD' => $scheduleD,
+            'contactM' => $contactM,
+            'contactD' => $contactD, 
         ]);
     }
     #[Route('/admin', name: 'app_admin')]
