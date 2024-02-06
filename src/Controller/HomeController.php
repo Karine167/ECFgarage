@@ -17,10 +17,14 @@ class HomeController extends AbstractController
         $imgLogo = $infosRepository->getLogo();
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$imgLogo;
-        dump($imgPath);
+        //recherche des horaires
+        $scheduleM = $infosRepository->getScheduleM();
+        $scheduleD = $infosRepository->getScheduleD();
         return $this->render('home/index.html.twig', [
             'director' => 'Vincent Parrot',
-            'imgPath' => $imgPath
+            'imgPath' => $imgPath,
+            'scheduleM' => $scheduleM,
+            'scheduleD' => $scheduleD,
         ]);
     }
     #[Route('/admin', name: 'app_admin')]

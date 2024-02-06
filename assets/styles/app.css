@@ -21,6 +21,10 @@ footer .nav-link {
     background-color: #7391C8;
 }
 
+footer {
+    font-size: 0.8em;
+}
+
 footer, header {
     background : #BDC6D9;
 }

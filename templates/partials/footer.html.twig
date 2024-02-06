@@ -1,25 +1,30 @@
-<footer class="border-top position-absolute bottom-0">
-<div class="row px-3">
+<footer class="border-top px-3 row position-absolute bottom-0">
     <div class="col-6">
-        <h5>Horaires</h5>
-        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <div class="scheduleM d-lg-none">
+            <h6>{{scheduleM.titleM}}</h6>
+            <p>{{scheduleM.contentM|raw}}</p>
+        </div>
+        <div class="scheduleD d-none d-lg-block">
+            <h6>{{scheduleD.titleD}}</h6>
+            <p>{{scheduleD.contentD|raw}}</p>
+        </div>
     </div>
     <div class="col-6">
-        <h5>Nous contacter</h5>
+        <h6>Nous contacter</h6>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
         <a href="#" >
         Formulaire de contact
         </a>
     </div>
-</div>
-<div class="row d-flex mb-5 border-top">
-    <ul class="nav ps-3 ">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary disabled">© 2024 Company, Inc</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-    </ul>
-</div>
+
+    <div class="col-12 d-flex mb-5 border-top">
+        <ul class="nav ps-3 ">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary disabled">© 2024 Company, Inc</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+        </ul>
+    </div>
 </footer>
 
 
