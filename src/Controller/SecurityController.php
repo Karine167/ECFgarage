@@ -20,12 +20,27 @@ class SecurityController extends AbstractController
         $imgLogo = $infosRepository->getLogo();
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$imgLogo;
+        //recherche des horaires
+        $scheduleM = $infosRepository->getScheduleM();
+        $scheduleD = $infosRepository->getScheduleD();
+        //recherche des contacts
+        $contactM = $infosRepository->getContactM();
+        $contactD = $infosRepository->getContactD();
+        
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'imgPath' => $imgPath]);
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername, 
+            'error' => $error, 
+            'imgPath' => $imgPath,
+            'scheduleM' => $scheduleM,
+            'scheduleD' => $scheduleD,
+            'contactM' => $contactM,
+            'contactD' => $contactD,
+        ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

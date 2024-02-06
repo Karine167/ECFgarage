@@ -20,8 +20,10 @@ class HomeController extends AbstractController
         //recherche des horaires
         $scheduleM = $infosRepository->getScheduleM();
         $scheduleD = $infosRepository->getScheduleD();
+        //recherche des contacts
         $contactM = $infosRepository->getContactM();
         $contactD = $infosRepository->getContactD();
+        
         return $this->render('home/index.html.twig', [
             'director' => 'Vincent Parrot',
             'imgPath' => $imgPath,
