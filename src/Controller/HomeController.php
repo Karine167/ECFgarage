@@ -11,17 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(Security $security, InfosRepository $infosRepository): Response
+    public function index(): Response
     {   
-        $imgLogo = $infosRepository->findImageLogo();
-        $mappingsParams = $this->getParameter('vich_uploader.mappings');
-        $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$imgLogo;
-        dump($imgPath);
-        $user = $security->getUser();
         return $this->render('home/index.html.twig', [
             'director' => 'Vincent Parrot',
-            'user' => $user,
-            'imgPath' => $imgPath,
         ]);
     }
     #[Route('/admin', name: 'app_admin')]
