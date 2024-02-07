@@ -26,13 +26,7 @@ class HomeController extends AbstractController
         $contactD = $infosRepository->getContactD();
         //recherche des infos de l'accueil 
         $infos = $infosRepository->getInfos();
-        /* foreach ($infos as $info) {
-            if ( $info['imageName']!= null){
-                $mappingsParams = $this->getParameter('vich_uploader.mappings');
-                $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$info['imageName'];
-                $info[]=['imgPath'=> $imgPath];
-            };
-        } */
+        
 
         dump($infos);
         return $this->render('home/index.html.twig', [

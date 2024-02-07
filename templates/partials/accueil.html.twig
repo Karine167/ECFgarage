@@ -1,86 +1,120 @@
 <div class="accordion d-lg-none m-5" id="accordionAccueil">
     <div class="accordion-item">
-        <h2 class="accordion-header">
-        <button class="accordion-button accordion-btn-show" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            Accordion Item #1
+        <h2 class="accordion-header ">
+        <button class="accordion-button accordion-btn-show fs-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            {{infos.1.title}}
         </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionAccueil">
         <div class="accordion-body">
-            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <img src="{{imagePath ~ infos.1.imageName}}" class="card-img-top w-50" alt="Image présentation">
+            {{infos.1.content|raw}}
+            <a href="#" class="btn btn-primary">Formulaire de contact</a>
         </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            Accordion Item #2
+        <button class="accordion-button collapsed fs-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            {{infos.7.title}}
         </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
         <div class="accordion-body">
-            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <img src="{{imagePath ~ infos.7.imageName}}" class="card-img-top w-50" alt="Image présentation">
+            {{infos.7.content|raw}}
+            <a href="#" class="btn btn-primary">Formulaire de contact</a>
         </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Accordion Item #3
+        <button class="accordion-button collapsed fs-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            {{infos.9.title}}
         </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
         <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <img src="{{imagePath ~ infos.9.imageName}}" class="card-img-top w-50" alt="Image présentation">
+            {{infos.9.content|raw}}
+            <a href="#" class="btn btn-primary">Formulaire de contact</a>
         </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            Accordion Item #4
+        <button class="accordion-button collapsed fs-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+            {{infos.11.title}}
         </button>
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
         <div class="accordion-body">
-            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            <img src="{{imagePath ~ infos.11.imageName}}" class="card-img-top w-50" alt="Image présentation">
+            {{infos.11.content|raw}}
+            <a href="#" class="btn btn-primary">Formulaire de contact</a>
+        </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+        <button class="accordion-button collapsed fs-3 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+            {{infos.13.title}}
+        </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
+        <div class="accordion-body">
+
+            {{infos.13.content|raw}}
+            <a href="#" class="btn btn-primary">Voir tous les Véhicules</a>
         </div>
         </div>
     </div>
 </div>
 
-<div class="d-block d-none d-lg-block m-5">
+<div class="d-block d-none d-lg-block m-2">
+    <div class="row  d-flex  flex-row card h-25 m-3 border-3 rounded">
+        <div class="col-3">
+            <img src="{{imagePath ~ infos.2.imageName}}" class="card-img" alt="...">
+        </div>
+        <div class="col-7 card-body">
+            <h5 class="fw-bold card-title">{{infos.2.title}}</h5>
+            <p class="card-text">{{infos.2.content|raw}}</p>  
+        </div>
+        <div class="col-2">
+            <a href="#" class="btn btn-primary">Formulaire de contact</a>
+        </div>
+    </div>
     <div class=" d-flex flex-row justify-content-center">
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card ms-4" style="width: 18rem;">
+            <img src="{{imagePath ~ infos.8.imageName}}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">{{infos.8.title}}</h5>
+                <p class="card-text">{{infos.8.content|raw}}</p>
+                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+            </div>
+        </div>
+        <div class="card ms-4" style="width: 18rem;">
+            <img src="{{imagePath ~ infos.10.imageName}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{infos.10.title}}</h5>
+                <p class="card-text">{{infos.10.content|raw}}</p>
+                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+            </div>
+        </div>
+        <div class="card ms-4" style="width: 18rem;">
+            <img src="{{imagePath ~ infos.12.imageName}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{infos.12.title}}</h5>
+                <p class="card-text">{{infos.12.content|raw}}</p>
+                <a href="#" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         <div class="card ms-4" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <div class="card ms-4" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-        <div class="card ms-4" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">{{infos.14.title}}</h5>
+                <p class="card-text">{{infos.14.content|raw}}</p>
+                <a href="#" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
     </div>

@@ -123,7 +123,6 @@ class InfosRepository extends ServiceEntityRepository
                 ->andWhere('i.hide = :val')
                 ->setParameter('val', 'false')
                 ->orderBy('i.location', 'ASC')
-                ->setMaxResults(10)
                 ->getQuery()
                 ->getResult();
         //Réorganisation des infos issues de la BDD
@@ -136,6 +135,7 @@ class InfosRepository extends ServiceEntityRepository
             $infosAccueil[]=['location' => $location, 'title' => $title, 'content' => $content,
             'imageName' => $imageName ];
         }
+        
         // Complétion pour les données manquantes
         $infosAccueilFinal=[];
         $j=0 ;
