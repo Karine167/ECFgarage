@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Infos;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Null_;
 
 /**
  * @extends ServiceEntityRepository<Infos>
@@ -39,7 +40,6 @@ class InfosRepository extends ServiceEntityRepository
     public function getScheduleM():array
     {
         $infosSchedule = $this->findBy(['location' => 3]);
-        dump($infosSchedule);
         foreach ($infosSchedule as $schedule){
             if (!($schedule->isHide())){
                 $titleM = $schedule->getLabel();
@@ -60,7 +60,6 @@ class InfosRepository extends ServiceEntityRepository
     public function getScheduleD():array
     {
         $infosSchedule = $this->findBy(['location' => 4 ]);
-        dump($infosSchedule);
         foreach ($infosSchedule as $schedule){
             if (!($schedule->isHide())){
                 $titleD = $schedule->getLabel();
@@ -101,7 +100,6 @@ class InfosRepository extends ServiceEntityRepository
     public function getContactD():array
     {
         $infosContact = $this->findBy(['location' => 6 ]);
-        dump($infosContact);
         foreach ($infosContact as $contact){
             if (!($contact->isHide())){
                 $titleD = $contact->getLabel();
@@ -113,6 +111,45 @@ class InfosRepository extends ServiceEntityRepository
             'titleD' => $titleD,
             'contentD' => $contentD
         ];
+    }
+
+    /**
+    * @return Infos[] Returns an array of Infos objects
+    * recherche des infos à afficher sur la page d'accueil
+    */
+    public function getInfos():array
+    {
+        $infosTab = $this->createQueryBuilder('i')
+                ->andWhere('i.hide = :val')
+                ->setParameter('val', 'false')
+                ->orderBy('i.location', 'ASC')
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult();
+        //Réorganisation des infos issues de la BDD
+        $infosAccueil=[]; 
+        foreach ($infosTab as $infos){
+            $location =$infos->getLocation()->getId();
+            $title = $infos->getLabel();
+            $content = $infos->getContent();
+            $imageName = $infos->getImageName();
+            $infosAccueil[]=['location' => $location, 'title' => $title, 'content' => $content,
+            'imageName' => $imageName ];
+        }
+        // Complétion pour les données manquantes
+        $infosAccueilFinal=[];
+        $j=0 ;
+        for ($i=0; $i<=15; $i++){
+            if ($infosAccueil[$j]['location'] != $i) {
+                $infosAccueilFinal[] = ['location' => $i, 'title' => 'En Construction', 'content' => 'En construction',
+                'imageName' => null ];
+            } else {
+                $infosAccueilFinal[] = $infosAccueil[$j];
+                $j +=1;
+            }
+        }
+        
+        return  $infosAccueilFinal;
     }
 
 

@@ -17,13 +17,24 @@ class HomeController extends AbstractController
         $imgLogo = $infosRepository->getLogo();
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$imgLogo;
+        $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
         //recherche des horaires
         $scheduleM = $infosRepository->getScheduleM();
         $scheduleD = $infosRepository->getScheduleD();
         //recherche des contacts
         $contactM = $infosRepository->getContactM();
         $contactD = $infosRepository->getContactD();
-        
+        //recherche des infos de l'accueil 
+        $infos = $infosRepository->getInfos();
+        /* foreach ($infos as $info) {
+            if ( $info['imageName']!= null){
+                $mappingsParams = $this->getParameter('vich_uploader.mappings');
+                $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$info['imageName'];
+                $info[]=['imgPath'=> $imgPath];
+            };
+        } */
+
+        dump($infos);
         return $this->render('home/index.html.twig', [
             'director' => 'Vincent Parrot',
             'imgPath' => $imgPath,
@@ -31,6 +42,8 @@ class HomeController extends AbstractController
             'scheduleD' => $scheduleD,
             'contactM' => $contactM,
             'contactD' => $contactD, 
+            'infos' => $infos,
+            'imagePath' => $imagePath
         ]);
     }
     #[Route('/admin', name: 'app_admin')]

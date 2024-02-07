@@ -1,5 +1,6 @@
 body {
-    background-color: #E3E7F1;
+    background-color: #52688f;
+    color: #071330;
 }
 .navbar-toggler-icon {
     width:2.5em;
@@ -27,4 +28,20 @@ footer {
 
 footer, header {
     background : #BDC6D9;
+}
+
+.accordion-button{
+    background-color: #E3E7F1;
+    border: solid 1px #7391C8;
+}
+.accordion-button:focus{
+    background-color: #BDC6D9;
+    border: solid 1px #7391C8;
+}
+accordion-btn-show{
+    background-color: #BDC6D9;
+    border: solid 1px #7391C8;
+}
+.accordion-body{
+    background: whitesmoke;
 }
