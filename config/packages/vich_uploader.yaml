@@ -10,3 +10,12 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+        galeries:
+            uri_prefix: /images/galeries
+            upload_destination: '%kernel.project_dir%/public/images/galeries'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

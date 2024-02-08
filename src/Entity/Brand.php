@@ -26,6 +26,11 @@ class Brand
         $this->model = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getBrand();
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

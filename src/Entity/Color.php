@@ -26,6 +26,11 @@ class Color
         $this->vehicle = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getColor();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

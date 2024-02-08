@@ -15,14 +15,10 @@ class EnergyCrudController extends AbstractCrudController
         return Energy::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield TextField::new('energy', 'Energie');
     }
-    */
+    
 }

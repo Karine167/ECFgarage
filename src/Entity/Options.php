@@ -26,6 +26,11 @@ class Options
         $this->vehicle = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getOptionName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

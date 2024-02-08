@@ -26,6 +26,11 @@ class Energy
         $this->vehicle = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getEnergy();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

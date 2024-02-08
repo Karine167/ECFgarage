@@ -15,14 +15,10 @@ class EquipmentsCrudController extends AbstractCrudController
         return Equipments::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield TextField::new('equipment', 'Equipement');
     }
-    */
+    
 }

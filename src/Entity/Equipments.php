@@ -26,6 +26,11 @@ class Equipments
         $this->vehicle = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getEquipment();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

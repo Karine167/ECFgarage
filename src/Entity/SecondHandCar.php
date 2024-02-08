@@ -7,7 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: SecondHandCarRepository::class)]
 class SecondHandCar
 {
@@ -68,12 +71,22 @@ class SecondHandCar
     #[ORM\ManyToMany(targetEntity: Energy::class, mappedBy: 'vehicle')]
     private Collection $energies;
 
-    #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Galery::class, orphanRemoval: true)]
-    private Collection $galeries;
-
     #[ORM\ManyToOne(inversedBy: 'vehicle')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Model $model = null;
+
+    // NOTE: This is not a mapped field of entity metadata, just a simple property.
+    #[Vich\UploadableField(mapping: 'galeries', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = 'construction-site-3279650_640.jpg';
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function __construct()
     {
@@ -81,7 +94,7 @@ class SecondHandCar
         $this->equipments = new ArrayCollection();
         $this->options = new ArrayCollection();
         $this->energies = new ArrayCollection();
-        $this->galeries = new ArrayCollection();
+        //$this->galeries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,7 +270,7 @@ class SecondHandCar
     {
         if (!$this->colors->contains($color)) {
             $this->colors->add($color);
-            $color->addVehicule($this);
+            $color->addVehicle($this);
         }
 
         return $this;
@@ -266,7 +279,7 @@ class SecondHandCar
     public function removeColor(Color $color): static
     {
         if ($this->colors->removeElement($color)) {
-            $color->removeVehicule($this);
+            $color->removeVehicle($this);
         }
 
         return $this;
@@ -353,36 +366,6 @@ class SecondHandCar
         return $this;
     }
 
-    /**
-     * @return Collection<int, Galery>
-     */
-    public function getGaleries(): Collection
-    {
-        return $this->galeries;
-    }
-
-    public function addGalery(Galery $galery): static
-    {
-        if (!$this->galeries->contains($galery)) {
-            $this->galeries->add($galery);
-            $galery->setVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeGalery(Galery $galery): static
-    {
-        if ($this->galeries->removeElement($galery)) {
-            // set the owning side to null (unless already changed)
-            if ($galery->getVehicle() === $this) {
-                $galery->setVehicle(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getModel(): ?Model
     {
         return $this->model;
@@ -394,4 +377,49 @@ class SecondHandCar
 
         return $this;
     }
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
 }
