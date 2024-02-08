@@ -2,7 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Brand;
+use App\Entity\Color;
+use App\Entity\Energy;
+use App\Entity\Equipments;
+use App\Entity\Galery;
 use App\Entity\Infos;
+use App\Entity\Model;
+use App\Entity\Options;
+use App\Entity\SecondHandCar;
+use App\Entity\Type;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -34,5 +43,15 @@ class DashboardController extends AbstractDashboardController
         ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Informations', 'fas fa-book', Infos::class)
         ->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Annonces','fa-solid fa-car', SecondHandCar::class);
+        yield MenuItem::linkToCrud('Marque', 'fa-solid fa-trademark', Brand::class);
+        yield MenuItem::linkToCrud('Modèle', 'fa-regular fa-id-card', Model::class);
+        yield MenuItem::linkToCrud('Type', 'fa-solid fa-truck-pickup', Type::class);
+        yield MenuItem::linkToCrud('Couleurs', 'fa-solid fa-palette', Color::class);
+        yield MenuItem::linkToCrud('Energie', 'fa-solid fa-gas-pump', Energy::class);
+        yield MenuItem::linkToCrud('Equipements', 'fa-solid fa-toolbox', Equipments::class);
+        yield MenuItem::linkToCrud('Options', 'fa-solid fa-plus', Options::class);
+        yield MenuItem::linkToCrud('Photos', 'fa-regular fa-images', Galery::class);
+        
     }
 }
