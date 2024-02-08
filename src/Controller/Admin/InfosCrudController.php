@@ -30,7 +30,7 @@ class InfosCrudController extends AbstractCrudController
         yield TextEditorField::new('content', 'Détails');
         yield TextareaField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex();
         yield ImageField::new('imageName')->setBasePath($infosImagePath)->hideOnForm();
-        yield BooleanField::new('hide', 'caché');
+        //yield BooleanField::new('hide', 'caché');
         yield AssociationField::new('location', 'position');
     }
     
