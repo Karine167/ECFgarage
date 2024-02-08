@@ -52,11 +52,11 @@ class SecondHandCar
     #[ORM\ManyToOne(inversedBy: 'secondHandCars')]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'vehicule')]
+    #[ORM\ManyToOne(inversedBy: 'vehicle')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $type = null;
 
-    #[ORM\ManyToMany(targetEntity: Color::class, mappedBy: 'vehicule')]
+    #[ORM\ManyToMany(targetEntity: Color::class, mappedBy: 'vehicle')]
     private Collection $colors;
 
     #[ORM\ManyToMany(targetEntity: Equipments::class, mappedBy: 'vehicle')]

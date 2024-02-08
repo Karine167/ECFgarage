@@ -19,11 +19,11 @@ class Color
     private ?string $color = null;
 
     #[ORM\ManyToMany(targetEntity: SecondHandCar::class, inversedBy: 'colors')]
-    private Collection $vehicule;
+    private Collection $vehicle;
 
     public function __construct()
     {
-        $this->vehicule = new ArrayCollection();
+        $this->vehicle = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,23 +46,23 @@ class Color
     /**
      * @return Collection<int, SecondHandCar>
      */
-    public function getVehicule(): Collection
+    public function getVehicle(): Collection
     {
-        return $this->vehicule;
+        return $this->vehicle;
     }
 
-    public function addVehicule(SecondHandCar $vehicule): static
+    public function addVehicle(SecondHandCar $vehicle): static
     {
-        if (!$this->vehicule->contains($vehicule)) {
-            $this->vehicule->add($vehicule);
+        if (!$this->vehicle->contains($vehicle)) {
+            $this->vehicle->add($vehicle);
         }
 
         return $this;
     }
 
-    public function removeVehicule(SecondHandCar $vehicule): static
+    public function removeVehicle(SecondHandCar $vehicle): static
     {
-        $this->vehicule->removeElement($vehicule);
+        $this->vehicle->removeElement($vehicle);
 
         return $this;
     }

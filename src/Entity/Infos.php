@@ -19,10 +19,10 @@ class Infos
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $label = null;
+    private ?string $label = 'En construction';
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $content = null;
+    private ?string $content = 'En construction';
 
     #[ORM\Column]
     private ?bool $hide = false;
@@ -36,7 +36,7 @@ class Infos
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
-    private ?string $imageName = null;
+    private ?string $imageName = 'construction-site-3279650_640.jpg';
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;

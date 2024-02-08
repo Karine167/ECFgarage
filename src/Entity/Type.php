@@ -19,11 +19,11 @@ class Type
     private ?string $type = null;
 
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: SecondHandCar::class)]
-    private Collection $vehicule;
+    private Collection $vehicle;
 
     public function __construct()
     {
-        $this->vehicule = new ArrayCollection();
+        $this->vehicle = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,27 +46,27 @@ class Type
     /**
      * @return Collection<int, SecondHandCar>
      */
-    public function getVehicule(): Collection
+    public function getVehicle(): Collection
     {
-        return $this->vehicule;
+        return $this->vehicle;
     }
 
-    public function addVehicule(SecondHandCar $vehicule): static
+    public function addVehicle(SecondHandCar $vehicule): static
     {
-        if (!$this->vehicule->contains($vehicule)) {
-            $this->vehicule->add($vehicule);
+        if (!$this->vehicle->contains($vehicule)) {
+            $this->vehicle->add($vehicule);
             $vehicule->setType($this);
         }
 
         return $this;
     }
 
-    public function removeVehicule(SecondHandCar $vehicule): static
+    public function removeVehicle(SecondHandCar $vehicle): static
     {
-        if ($this->vehicule->removeElement($vehicule)) {
+        if ($this->vehicle->removeElement($vehicle)) {
             // set the owning side to null (unless already changed)
-            if ($vehicule->getType() === $this) {
-                $vehicule->setType(null);
+            if ($vehicle->getType() === $this) {
+                $vehicle->setType(null);
             }
         }
 

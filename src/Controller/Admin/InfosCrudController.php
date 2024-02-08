@@ -33,5 +33,4 @@ class InfosCrudController extends AbstractCrudController
         //yield BooleanField::new('hide', 'caché');
         yield AssociationField::new('location', 'position');
     }
-    
 }
