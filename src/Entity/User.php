@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -38,6 +40,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $address = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SecondHandCar::class)]
+    private Collection $secondHandCars;
+
+    #[ORM\ManyToMany(targetEntity: Contact::class, mappedBy: 'user')]
+    private Collection $contacts;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class)]
+    private Collection $reviews;
+
+    public function __construct()
+    {
+        $this->secondHandCars = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +171,93 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAddress(string $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SecondHandCar>
+     */
+    public function getSecondHandCars(): Collection
+    {
+        return $this->secondHandCars;
+    }
+
+    public function addSecondHandCar(SecondHandCar $secondHandCar): static
+    {
+        if (!$this->secondHandCars->contains($secondHandCar)) {
+            $this->secondHandCars->add($secondHandCar);
+            $secondHandCar->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSecondHandCar(SecondHandCar $secondHandCar): static
+    {
+        if ($this->secondHandCars->removeElement($secondHandCar)) {
+            // set the owning side to null (unless already changed)
+            if ($secondHandCar->getUser() === $this) {
+                $secondHandCar->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): static
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): static
+    {
+        if ($this->contacts->removeElement($contact)) {
+            $contact->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
+            }
+        }
 
         return $this;
     }
