@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Annouces de Véhicules d'occasion {% endblock %}
+
+{% block body %}
+
+    {% for secondHandCar in secondHandCars %}
+
+        <h2> {{secondHandCar.reference}} </h2>
+
+    {% endfor %}
+
+{% endblock %}

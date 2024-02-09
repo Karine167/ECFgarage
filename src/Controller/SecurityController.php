@@ -17,15 +17,11 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('target_path');
         } */
         //recherche du path du logo
-        $imgLogo = $infosRepository->getLogo();
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
-        $imgPath = $mappingsParams['infos']['uri_prefix'].'/'.$imgLogo;
-        //recherche des horaires
-        $scheduleM = $infosRepository->getScheduleM();
-        $scheduleD = $infosRepository->getScheduleD();
-        //recherche des contacts
-        $contactM = $infosRepository->getContactM();
-        $contactD = $infosRepository->getContactD();
+        $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
+        
+        //recherche des infos de l'accueil, du header et du footer 
+        $infos = $infosRepository->getInfos();
         
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -35,11 +31,8 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername, 
             'error' => $error, 
-            'imgPath' => $imgPath,
-            'scheduleM' => $scheduleM,
-            'scheduleD' => $scheduleD,
-            'contactM' => $contactM,
-            'contactD' => $contactD,
+            'infos' => $infos,
+            'imagePath' => $imagePath
         ]);
     }
 
