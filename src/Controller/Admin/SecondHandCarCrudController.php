@@ -39,7 +39,7 @@ class SecondHandCarCrudController extends AbstractCrudController
         yield AssociationField::new('model', 'Modèle');
         yield AssociationField::new('type', 'Type');
         yield AssociationField::new('energies', 'Energies');
-        yield AssociationField::new('colors', 'Couleurs');
+        yield AssociationField::new('color', 'Couleur');
         yield AssociationField::new('options', 'Options');
         yield AssociationField::new('equipments', 'Equipements');
         yield AssociationField::new('user', 'Employé')->hideOnIndex();

@@ -52,24 +52,12 @@ class SecondHandCar
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $create_date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'secondHandCars')]
+    #[ORM\ManyToOne(inversedBy: 'secondHandCars', targetEntity: User::class)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicle')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $type = null;
-
-    #[ORM\ManyToMany(targetEntity: Color::class, mappedBy: 'vehicle')]
-    private Collection $colors;
-
-    #[ORM\ManyToMany(targetEntity: Equipments::class, mappedBy: 'vehicle')]
-    private Collection $equipments;
-
-    #[ORM\ManyToMany(targetEntity: Options::class, mappedBy: 'vehicle')]
-    private Collection $options;
-
-    #[ORM\ManyToMany(targetEntity: Energy::class, mappedBy: 'vehicle')]
-    private Collection $energies;
 
     #[ORM\ManyToOne(inversedBy: 'vehicle')]
     #[ORM\JoinColumn(nullable: false)]
@@ -78,13 +66,25 @@ class SecondHandCar
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Galery::class)]
     private Collection $galeries;
 
+    #[ORM\ManyToMany(targetEntity: Color::class, inversedBy: 'secondHandCars')]
+    private Collection $color;
+
+    #[ORM\ManyToMany(targetEntity: Energy::class, inversedBy: 'secondHandCars')]
+    private Collection $energies;
+
+    #[ORM\ManyToMany(targetEntity: Equipments::class, inversedBy: 'secondHandCars')]
+    private Collection $equipments;
+
+    #[ORM\ManyToMany(targetEntity: Options::class, inversedBy: 'secondHandCars')]
+    private Collection $options;
+
     public function __construct()
     {
-        $this->colors = new ArrayCollection();
+        $this->galeries = new ArrayCollection();
+        $this->color = new ArrayCollection();
+        $this->energies = new ArrayCollection();
         $this->equipments = new ArrayCollection();
         $this->options = new ArrayCollection();
-        $this->energies = new ArrayCollection();
-        $this->galeries = new ArrayCollection();
     }
 
     public function __toString()
@@ -253,113 +253,6 @@ class SecondHandCar
         return $this;
     }
 
-    /**
-     * @return Collection<int, Color>
-     */
-    public function getColors(): Collection
-    {
-        return $this->colors;
-    }
-
-    public function addColor(Color $color): static
-    {
-        if (!$this->colors->contains($color)) {
-            $this->colors->add($color);
-            $color->addVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeColor(Color $color): static
-    {
-        if ($this->colors->removeElement($color)) {
-            $color->removeVehicle($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Equipments>
-     */
-    public function getEquipments(): Collection
-    {
-        return $this->equipments;
-    }
-
-    public function addEquipment(Equipments $equipment): static
-    {
-        if (!$this->equipments->contains($equipment)) {
-            $this->equipments->add($equipment);
-            $equipment->addVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEquipment(Equipments $equipment): static
-    {
-        if ($this->equipments->removeElement($equipment)) {
-            $equipment->removeVehicle($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Options>
-     */
-    public function getOptions(): Collection
-    {
-        return $this->options;
-    }
-
-    public function addOption(Options $option): static
-    {
-        if (!$this->options->contains($option)) {
-            $this->options->add($option);
-            $option->addVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOption(Options $option): static
-    {
-        if ($this->options->removeElement($option)) {
-            $option->removeVehicle($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Energy>
-     */
-    public function getEnergies(): Collection
-    {
-        return $this->energies;
-    }
-
-    public function addEnergy(Energy $energy): static
-    {
-        if (!$this->energies->contains($energy)) {
-            $this->energies->add($energy);
-            $energy->addVehicle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEnergy(Energy $energy): static
-    {
-        if ($this->energies->removeElement($energy)) {
-            $energy->removeVehicle($this);
-        }
-
-        return $this;
-    }
 
     public function getModel(): ?Model
     {
@@ -399,6 +292,102 @@ class SecondHandCar
                 $galery->setVehicle(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Color>
+     */
+    public function getColor(): Collection
+    {
+        return $this->color;
+    }
+
+    public function addColor(Color $color): static
+    {
+        if (!$this->color->contains($color)) {
+            $this->color->add($color);
+        }
+
+        return $this;
+    }
+
+    public function removeColor(Color $color): static
+    {
+        $this->color->removeElement($color);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Energy>
+     */
+    public function getEnergies(): Collection
+    {
+        return $this->energies;
+    }
+
+    public function addEnergy(Energy $energy): static
+    {
+        if (!$this->energies->contains($energy)) {
+            $this->energies->add($energy);
+        }
+
+        return $this;
+    }
+
+    public function removeEnergy(Energy $energy): static
+    {
+        $this->energies->removeElement($energy);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipments>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipments $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipments $equipment): static
+    {
+        $this->equipments->removeElement($equipment);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Options>
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(Options $option): static
+    {
+        if (!$this->options->contains($option)) {
+            $this->options->add($option);
+        }
+
+        return $this;
+    }
+
+    public function removeOption(Options $option): static
+    {
+        $this->options->removeElement($option);
 
         return $this;
     }

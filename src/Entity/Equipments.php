@@ -18,12 +18,12 @@ class Equipments
     #[ORM\Column(length: 255)]
     private ?string $equipment = null;
 
-    #[ORM\ManyToMany(targetEntity: SecondHandCar::class, inversedBy: 'equipments')]
-    private Collection $vehicle;
+    #[ORM\ManyToMany(targetEntity: SecondHandCar::class, mappedBy: 'equipments')]
+    private Collection $secondHandCars;
 
     public function __construct()
     {
-        $this->vehicle = new ArrayCollection();
+        $this->secondHandCars = new ArrayCollection();
     }
 
     public function __toString()
@@ -51,24 +51,30 @@ class Equipments
     /**
      * @return Collection<int, SecondHandCar>
      */
-    public function getVehicle(): Collection
+    public function getSecondHandCars(): Collection
     {
-        return $this->vehicle;
+        return $this->secondHandCars;
     }
 
-    public function addVehicle(SecondHandCar $vehicle): static
+    public function addSecondHandCar(SecondHandCar $secondHandCar): static
     {
-        if (!$this->vehicle->contains($vehicle)) {
-            $this->vehicle->add($vehicle);
+        if (!$this->secondHandCars->contains($secondHandCar)) {
+            $this->secondHandCars->add($secondHandCar);
+            $secondHandCar->addEquipment($this);
         }
 
         return $this;
     }
 
-    public function removeVehicle(SecondHandCar $vehicle): static
+    public function removeSecondHandCar(SecondHandCar $secondHandCar): static
     {
-        $this->vehicle->removeElement($vehicle);
+        if ($this->secondHandCars->removeElement($secondHandCar)) {
+            $secondHandCar->removeEquipment($this);
+        }
 
         return $this;
     }
+
+    
 }
+
