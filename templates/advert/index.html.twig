@@ -4,10 +4,10 @@
 
 {% block body %}
 
-    {% for secondHandCar in secondHandCars %}
-
-        <h2> {{secondHandCar.reference}} </h2>
-
-    {% endfor %}
+    <div class="row flex-row justify-content-center">
+        {% for secondHandCar in secondHandCars %}
+            {% include 'partials/advert/advert_list.html.twig' %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

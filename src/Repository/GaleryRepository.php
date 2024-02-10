@@ -21,6 +21,21 @@ class GaleryRepository extends ServiceEntityRepository
         parent::__construct($registry, Galery::class);
     }
 
+    /**
+    * @return Galery[] Returns an array of Galery objects
+    */
+    public function findByVehicle($value): array
+    {
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.vehicle = :val')
+            ->setParameter('val', $value)
+            ->orderBy('g.id', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Galery[] Returns an array of Galery objects
 //     */
