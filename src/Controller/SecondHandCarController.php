@@ -21,15 +21,26 @@ class SecondHandCarController extends AbstractController
         //recherche des infos de l'accueil, du header et du footer 
         $infos = $infosRepository->getInfos();
         $secondHandCars = $secondHandCarRepository->findBy([], ['create_date' => 'DESC']);
-        
-        /* // recherche des photos des véhicules
-        foreach ($secondHandCar in )
-        $photos = $galeryRepository->findByVehicle(('1'));
-        dump($photos); */
+        // recherche de la première photo des véhicules
+        $photos=[];
+        foreach ($secondHandCars as $secondHandCar){
+            $photoId = $secondHandCar->getId();
+            $photo = $galeryRepository->findOneBy(['vehicle'=> $photoId]);
+            if ($photo){
+                $photoName = $photo->getImageName();
+            }else{
+                $photoName = null;
+            }
+            $photos[$photoId] = $photoName;
+        }
+        //chemin pour les photos des véhicules
+        $photoPath = $mappingsParams['galeries']['uri_prefix'].'/';
         return $this->render('advert/index.html.twig', [
             'secondHandCars' => $secondHandCars,
             'infos' => $infos,
-            'imagePath' => $imagePath
+            'imagePath' => $imagePath,
+            'photos' => $photos,
+            'photoPath' => $photoPath
         ]);
     }
 }

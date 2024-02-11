@@ -1,7 +1,10 @@
 <div class="col col-md-4 col-sm-2 my-2">
     <div class="card ms-4" style="width: 18rem;">
         <h2> {{secondHandCar.reference}} </h2>
-        {# <img src="{{imagePath ~ secondHandCar.galeries.imageName}}" class="card-img-top" alt="...">  #}
+        {% if (photos[secondHandCar.Id])%}
+            <img src="{{photoPath ~ photos[secondHandCar.Id]}}" class="card-img-top" alt="...">  
+        {% endif %} 
+
         <div class="card-body">
             <h5 class="card-title">{{secondHandCar.model.brand}}{{secondHandCar.model}}</h5>
             <p class="card-text">
