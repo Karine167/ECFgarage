@@ -21,6 +21,63 @@ class SecondHandCarRepository extends ServiceEntityRepository
         parent::__construct($registry, SecondHandCar::class);
     }
 
+
+    public function findOneByIdJoinedToEquipments(int $secondHandCarId): ?SecondHandCar
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, e
+            FROM App\Entity\SecondHandCar s
+            INNER JOIN s.equipments e
+            WHERE s.id = :id'
+        )->setParameter('id', $secondHandCarId);
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findOneByIdJoinedToOptions(int $secondHandCarId): ?SecondHandCar
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, o
+            FROM App\Entity\SecondHandCar s
+            INNER JOIN s.options o
+            WHERE s.id = :id'
+        )->setParameter('id', $secondHandCarId);
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findOneByIdJoinedToColor(int $secondHandCarId): ?SecondHandCar
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, c
+            FROM App\Entity\SecondHandCar s
+            INNER JOIN s.color c
+            WHERE s.id = :id'
+        )->setParameter('id', $secondHandCarId);
+
+        return $query->getOneOrNullResult();
+    }
+
+    public function findOneByIdJoinedToEnergy(int $secondHandCarId): ?SecondHandCar
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, en
+            FROM App\Entity\SecondHandCar s
+            INNER JOIN s.energies en
+            WHERE s.id = :id'
+        )->setParameter('id', $secondHandCarId);
+
+        return $query->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return SecondHandCar[] Returns an array of SecondHandCar objects
 //     */

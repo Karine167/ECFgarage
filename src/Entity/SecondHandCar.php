@@ -7,7 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Array_;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Flex\Response as FlexResponse;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[Vich\Uploadable]
@@ -320,6 +323,17 @@ class SecondHandCar
         return $this;
     }
 
+    public function showColors(SecondHandCarRepository $secondHandCarRepository, int $id): Array
+    {
+        $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToColor($id);
+        $colors = $secondHanCar->getColor();
+        $colorsCar=[];
+        foreach ($colors as $color){
+            $colorsCar[]= $color->getColor();
+        }
+        return $colorsCar;
+    }
+
     /**
      * @return Collection<int, Energy>
      */
@@ -342,6 +356,17 @@ class SecondHandCar
         $this->energies->removeElement($energy);
 
         return $this;
+    }
+
+    public function showEnergies(SecondHandCarRepository $secondHandCarRepository, int $id): Array
+    {
+        $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToEnergy($id);
+        $energies = $secondHanCar->getEnergies();
+        $energiesCar=[];
+        foreach ($energies as $energy){
+            $energiesCar[]= $energy->getEnergy();
+        }
+        return $energiesCar;
     }
 
     /**
@@ -368,6 +393,17 @@ class SecondHandCar
         return $this;
     }
 
+    public function showEquipments(SecondHandCarRepository $secondHandCarRepository, int $id): Array
+    {
+        $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToEquipments($id);
+        $equipments = $secondHanCar->getEquipments();
+        $equipmentsCar=[];
+        foreach ($equipments as $equipment){
+            $equipmentsCar[]= $equipment->getEquipment();
+        }
+        return $equipmentsCar;
+    }
+
     /**
      * @return Collection<int, Options>
      */
@@ -392,4 +428,14 @@ class SecondHandCar
         return $this;
     }
 
+    public function showOptions(SecondHandCarRepository $secondHandCarRepository, int $id): Array
+    {
+        $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToOptions($id);
+        $options = $secondHanCar->getOptions();
+        $optionsCar=[];
+        foreach ($options as $option){
+            $optionsCar[]= $option->getOptionName();
+        }
+        return $optionsCar;
+    }
 }

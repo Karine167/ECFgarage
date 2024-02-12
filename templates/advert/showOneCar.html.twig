@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Référence de l'annonce : {{secondHandCar.reference}} {% endblock %}
+{% block title %} {{secondHandCar.model.brand}} {{secondHandCar.model}} {% endblock %}
 
 {% block body %}
     <div class="row flex-row">
-        <div class="col-6">
-            {% if (photos|length > 0) %}
-                <div id="carouselPhotos" class="carousel slide justify-content-center">
+        {% if (photos|length > 0) %}
+            <div class="col-lg-6 col-md-12 ">
+                <div id="carouselPhotos" class="carousel slide justify-content-center m-3">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselPhotos" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselPhotos" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -40,32 +40,87 @@
                         </button>
                     {% endif %}
                 </div>
-            {% endif %}
-        </div>
-        <div class="card ms-4 col-6" style="width: 18rem;">
+            </div>
+        {% else %}
+            <div class="col-lg-6 col-md-12 ">
+                <img src="{{photoPath ~ 'DefaultCar.png'}}" class="card-img-top m-5 w-75" alt="photo de {{secondHandCar.model.brand}} {{secondHandCar.model}} absente">  
+            </div>
+        {% endif %}
+        <div class="card m-3 col-lg-3 col-md-6" style="width: 18rem;">
             <div class="card-body flex-row">
                 <div class="col">
                     <h5 class="card-title">{{secondHandCar.model.brand}} {{secondHandCar.model}}</h5>
+                    <h6>{% if (secondHandCar.reference) %}Référence de l'annonce : {{secondHandCar.reference}}{% endif %}</h6>
                     <p class="card-text">
                         <h6> Prix : {{secondHandCar.price}} €</h6>
                         <hr>
-                        Mise en circulation : {{secondHandCar.CirculationYear.format("d/m/Y")}}<br> 
-                        km : {{secondHandCar.kilometers}}
-                        <hr>
+                        {% if (secondHandCar.type) %} Type : {{secondHandCar.type}} <br>{% endif %}
+                        {% if (colors|length > 0) %}
+                            <p> Couleurs :
+                            {% for color in colors %}
+                                {{color -}} 
+                            {% endfor %}  
+                            <hr>
+                            </p>
+                        {% endif %}
+                        <p>
+                        {% if (secondHandCar.CirculationYear) %} Mise en circulation : {{secondHandCar.CirculationYear.format("d/m/Y")}}<br>{% endif %} 
+                        {% if (secondHandCar.kilometers) %}km : {{secondHandCar.kilometers}}<br>{% endif %}
+                        {% if (secondHandCar.fiscalPower) %} Puissance Fiscale : {{secondHandCar.fiscalPower}} CV <br> {% endif %}
+                        {% if (secondHandCar.dinPower) %} Puissance DIN : {{secondHandCar.dinPower}} CV <br>{% endif %}
+                        </p>
+                        <p>
+                        {% if (energies|length > 0) %}
+                            Energies :
+                            {% for energy in energies %}
+                                {{energy -}} 
+                            {% endfor %} 
+                            <br>  
+                        {% endif %}
+                        {% if (secondHandCar.autoGearBox) %} Boîte automatique <br>{% endif %}
+                        </p>
+                        <p>
+                        {% if (secondHandCar.doors) %} Nombres de portes : {{secondHandCar.doors}} <br>{% endif %}
+                        {% if (secondHandCar.seats) %} Nombres de places : {{secondHandCar.seats}}<br> {% endif %}
+                        {% if (secondHandCar.critairNb) %} Crit'air : {{secondHandCar.critairNb}}<br> {% endif %}
+                        </p>
+                        
                     </p>
                 </div>
-                <div class="col">
-                    <h5 class="card-title">Equipements</h5>
-                    <p class="card-text">
-
-                    </p>
-            </div>
-            <div class="card-footer">
-                <strong> {{infos.5.title}}</strong>
-                {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
+        <div class="card m-3 col-lg-3 col-md-6" style="width: 18rem;">
+            <div class="card-body flex-row">
+                <div class="col">
+                    {% if (equipments|length > 0) %}
+                        <div class="col">
+                            <h5 class="card-title">Equipements</h5>
+                            <p class="card-text">
+                                {% for equipement in equipments %}
+                                    {{equipement }} <br>
+                                {% endfor %}  
+                                <hr>
+                            </p>
+                        </div>
+                    {% endif %}
+                    {% if (options|length > 0) %}
+                        <div class="col">
+                            <h5 class="card-title">Options</h5>
+                            <p class="card-text">
+                                {% for option in options %}
+                                    {{option }} <br>
+                                {% endfor %}  
+                            <br>
+                            </p>
+                        </div>
+                    {% endif %}
+                    <div class="card-footer">
+                        <strong> {{infos.5.title}}</strong>
+                        {{infos.5.content|raw}}
+                        <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                    </div>
+                </div>
+        </div>
     </div>
-
+    
 {% endblock %}

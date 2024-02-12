@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Equipments;
 use App\Entity\SecondHandCar;
+use App\Repository\EquipmentsRepository;
 use App\Repository\GaleryRepository;
 use App\Repository\InfosRepository;
 use App\Repository\SecondHandCarRepository;
@@ -47,9 +49,8 @@ class SecondHandCarController extends AbstractController
     }
 
     #[Route('/advert/{id}', name: 'app_advert_oneCar')]
-    public function showVehicle(SecondHandCar $secondHandCar, InfosRepository $infosRepository, GaleryRepository $galeryRepository): Response
+    public function showVehicle(SecondHandCar $secondHandCar, InfosRepository $infosRepository, GaleryRepository $galeryRepository, SecondHandCarRepository $secondHandCarRepository): Response
     {
-        dump($secondHandCar);
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -58,20 +59,35 @@ class SecondHandCarController extends AbstractController
         $infos = $infosRepository->getInfos();
 
         $id = $secondHandCar->getId();
-        dump($id);
         // recherche de toutes les images du véhicule
         $photos = $galeryRepository->findBy(['vehicle'=> $id]);
-        dump($photos);
+
         //recherche du path des images 
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
-        $photoPath = $mappingsParams['galeries']['uri_prefix'].'/'; 
+        $photoPath = $mappingsParams['galeries']['uri_prefix'].'/';
+        
+        //recherche des équipements du véhicule
+        $equipments = $secondHandCar->showEquipments($secondHandCarRepository, $id);
 
+        //recherche des options du véhicule
+        $options = $secondHandCar->showOptions($secondHandCarRepository, $id);
+
+        //recherche des couleurs du véhicule
+        $colors = $secondHandCar->showColors($secondHandCarRepository, $id);
+
+        //recherche des énergies du véhicule
+        $energies = $secondHandCar->showEnergies($secondHandCarRepository, $id);
+        
         return $this->render('advert/showOneCar.html.twig', [
             'infos' => $infos,
             'imagePath' => $imagePath,
             'secondHandCar' => $secondHandCar, 
             'photos' => $photos,
-            'photoPath' => $photoPath 
+            'photoPath' => $photoPath,
+            'equipments' => $equipments,
+            'options' => $options,
+            'colors' => $colors,
+            'energies' => $energies
         ]);
     }
 }
