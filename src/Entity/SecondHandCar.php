@@ -326,10 +326,12 @@ class SecondHandCar
     public function showColors(SecondHandCarRepository $secondHandCarRepository, int $id): Array
     {
         $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToColor($id);
-        $colors = $secondHanCar->getColor();
         $colorsCar=[];
-        foreach ($colors as $color){
-            $colorsCar[]= $color->getColor();
+        if ($secondHanCar){
+            $colors = $secondHanCar->getColor();
+            foreach ($colors as $color){
+                $colorsCar[]= $color->getColor();
+            }
         }
         return $colorsCar;
     }
@@ -361,10 +363,12 @@ class SecondHandCar
     public function showEnergies(SecondHandCarRepository $secondHandCarRepository, int $id): Array
     {
         $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToEnergy($id);
-        $energies = $secondHanCar->getEnergies();
         $energiesCar=[];
-        foreach ($energies as $energy){
-            $energiesCar[]= $energy->getEnergy();
+        if ($secondHanCar){
+            $energies = $secondHanCar->getEnergies();
+            foreach ($energies as $energy){
+                $energiesCar[]= $energy->getEnergy();
+            }
         }
         return $energiesCar;
     }
@@ -396,10 +400,12 @@ class SecondHandCar
     public function showEquipments(SecondHandCarRepository $secondHandCarRepository, int $id): Array
     {
         $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToEquipments($id);
-        $equipments = $secondHanCar->getEquipments();
         $equipmentsCar=[];
-        foreach ($equipments as $equipment){
-            $equipmentsCar[]= $equipment->getEquipment();
+        if ($secondHanCar){
+            $equipments = $secondHanCar->getEquipments();
+            foreach ($equipments as $equipment){
+                $equipmentsCar[]= $equipment->getEquipment();
+            }
         }
         return $equipmentsCar;
     }
@@ -431,10 +437,12 @@ class SecondHandCar
     public function showOptions(SecondHandCarRepository $secondHandCarRepository, int $id): Array
     {
         $secondHanCar = $secondHandCarRepository->findOneByIdJoinedToOptions($id);
-        $options = $secondHanCar->getOptions();
         $optionsCar=[];
-        foreach ($options as $option){
-            $optionsCar[]= $option->getOptionName();
+        if ($secondHanCar){
+            $options = $secondHanCar->getOptions();
+            foreach ($options as $option){
+                $optionsCar[]= $option->getOptionName();
+            }
         }
         return $optionsCar;
     }
