@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Référence de l'annonce : {{secondHandCar.reference}} {% endblock %}
+
+{% block body %}
+    <div class="row flex-row">
+        <div class="col-6">
+            {% if (photos|length > 0) %}
+                <div id="carouselPhotos" class="carousel slide justify-content-center">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselPhotos" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselPhotos" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselPhotos" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                        <div class="carousel-inner">
+                            {% if (photos[0]) %}
+                                <div class="carousel-item active">
+                                    <img src="{{photoPath ~ photos[0].imageName}}" class="card-img-top" alt="1ère photo de {{secondHandCar.model.brand}} {{secondHandCar.model}}">  
+                                </div>
+                            {% endif %}
+                            {% if (photos|length >1 and photos[1])%} 
+                                <div class="carousel-item">
+                                    <img src="{{photoPath ~ photos[1].imageName}}" class="card-img-top" alt="2ème photo de {{secondHandCar.model.brand}} {{secondHandCar.model}}">  
+                                </div>
+                            {% endif %} 
+                            {% if (photos|length >2 and photos[2])%}
+                                <div class="carousel-item">
+                                    <img src="{{photoPath ~ photos[2].imageName}}" class="card-img-top" alt="3ème photo de {{secondHandCar.model.brand}} {{secondHandCar.model}}">  
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% if (photos|length >1 and photos[1])%}     
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPhotos" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselPhotos" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="card ms-4 col-6" style="width: 18rem;">
+            <div class="card-body flex-row">
+                <div class="col">
+                    <h5 class="card-title">{{secondHandCar.model.brand}} {{secondHandCar.model}}</h5>
+                    <p class="card-text">
+                        <h6> Prix : {{secondHandCar.price}} €</h6>
+                        <hr>
+                        Mise en circulation : {{secondHandCar.CirculationYear.format("d/m/Y")}}<br> 
+                        km : {{secondHandCar.kilometers}}
+                        <hr>
+                    </p>
+                </div>
+                <div class="col">
+                    <h5 class="card-title">Equipements</h5>
+                    <p class="card-text">
+
+                    </p>
+            </div>
+            <div class="card-footer">
+                <strong> {{infos.5.title}}</strong>
+                {{infos.5.content|raw}}
+                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

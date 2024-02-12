@@ -1,19 +1,21 @@
 <div class="col col-md-4 col-sm-2 my-2">
-    <div class="card ms-4" style="width: 18rem;">
-        <h2> {{secondHandCar.reference}} </h2>
-        {% if (photos[secondHandCar.Id])%}
-            <img src="{{photoPath ~ photos[secondHandCar.Id]}}" class="card-img-top" alt="...">  
-        {% endif %} 
+    <div class="card ms-4" style="width: 18rem;"> 
+            <h2> {{secondHandCar.reference}} </h2>
+            {% if (photos[secondHandCar.Id])%}
+                <img src="{{photoPath ~ photos[secondHandCar.Id]}}" class="card-img-top" alt="...">  
+            {% endif %} 
 
-        <div class="card-body">
-            <h5 class="card-title">{{secondHandCar.model.brand}}{{secondHandCar.model}}</h5>
-            <p class="card-text">
-                <h6> Prix : {{secondHandCar.price}} </h6>
-                <hr>
-                Mise en circulation : {{secondHandCar.CirculationYear.format("d/m/Y")}}<br>
-                km : {{secondHandCar.kilometers}}
-            </p>
-        </div>
+            <div class="card-body">
+                <h5 class="card-title">{{secondHandCar.model.brand}} {{secondHandCar.model}}</h5>
+                <p class="card-text">
+                    <h6> Prix : {{secondHandCar.price}} €</h6>
+                    <hr>
+                    Mise en circulation : {{secondHandCar.CirculationYear.format("d/m/Y")}}<br>
+                    km : {{secondHandCar.kilometers}}
+                    <a href="{{ path('app_advert_oneCar',{'id': secondHandCar.id})}}" class="advert-list">Plus d'infos</a>
+                </p>
+            </div>
+        
         <div class="card-footer">
             <strong> {{infos.5.title}}</strong>
             {{infos.5.content|raw}}
