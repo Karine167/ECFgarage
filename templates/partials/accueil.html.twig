@@ -9,7 +9,6 @@
         <div class="accordion-body">
             <img src="{{imagePath ~ infos.1.imageName}}" class="card-img-top w-50" alt="Image présentation">
             {{infos.1.content|raw}}
-            <a href="#" class="btn btn-primary">Formulaire de contact</a>
         </div>
         </div>
     </div>
@@ -29,7 +28,7 @@
                 <hr>
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Entretien_Revision' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         </div>
@@ -50,7 +49,7 @@
                 <hr>
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Carrosserie' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         </div>
@@ -71,7 +70,7 @@
                 <hr>
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Mecanique'})}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         </div>
@@ -93,7 +92,7 @@
                 <hr>
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Ventes' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         </div>
@@ -120,7 +119,7 @@
             <div class="card-footer">
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Entretien_Revision' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         <div class="card ms-4" style="width: 18rem;">
@@ -132,7 +131,7 @@
             <div class="card-footer">
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Carrosserie' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         <div class="card ms-4" style="width: 18rem;">
@@ -144,7 +143,7 @@
             <div class="card-footer">
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Mecanique' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
         <div class="card ms-4" style="width: 18rem;">
@@ -157,7 +156,7 @@
             <div class="card-footer">
                 <strong> {{infos.5.title}}</strong>
                 {{infos.5.content|raw}}
-                <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                <a href="{{ path('app_contact',{'ref': 'Ventes' })}}" class="btn btn-primary">Formulaire de contact</a>
             </div>
         </div>
     </div>

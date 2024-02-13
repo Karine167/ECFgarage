@@ -15,9 +15,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/contact/{ref}', name: 'app_contact')]
     public function index(InfosRepository $infosRepository, Request $request, EntityManagerInterface $manager): Response
     {
+                
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -31,7 +32,10 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $contact= $form->getData();
-            //$contact->setContent($ref.' : '.$contact->getContent());
+            $ref = $request->attributes->get('_route_params')['ref'];
+            if ($ref){
+                $contact->setContent($ref.' : '.$contact->getContent());
+            }
             $manager->persist($contact);
             $manager->flush();
 
@@ -39,8 +43,10 @@ class ContactController extends AbstractController
                 'success',
                 'Votre demande a bien été prise en compte !'
             );
-
-            return $this->redirectToRoute('app_contact');
+            
+            $manager->persist($contact);
+            $manager->flush();
+            return $this->redirectToRoute('app_contact', ['ref'=> 'formContact']);
         }
         return $this->render('contact/index.html.twig', [
             'infos' => $infos,

@@ -117,7 +117,7 @@
                     <div class="card-footer">
                         <strong> {{infos.5.title}}</strong>
                         {{infos.5.content|raw}}
-                        <a href="#" class="btn btn-primary">Formulaire de contact</a>
+                        <a href="{{ path('app_contact',{'ref': secondHandCar.id ~ secondHandCar.model.brand ~ secondHandCar.model })}}" class="btn btn-primary">Formulaire de contact</a>
                     </div>
                 </div>
         </div>

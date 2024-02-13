@@ -4,16 +4,18 @@
 
 {% block body %}
     
-    <div class="container m-4 ">
-        <h4> Formulaire de contact </h4>
-        <div>
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success mt-4">
-                    {{message}}
-                <div>
-            {% endfor %}
-        </div>
+    <div class="row m-4 ">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                <h6>{{message}}<h6>
+            </div>
+        {% endfor %}
+    </div>
 
-        {{form(form)}}
+    <div class="row m-4 ">
+        <h4> Formulaire de contact </h4>
+        <div class="col col-9 ms-5 ps-5">
+            {{form(form)}}
+        </div>
     </div>
 {% endblock %}
