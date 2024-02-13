@@ -93,10 +93,10 @@ class SecondHandCarRepository extends ServiceEntityRepository
                 ->setParameter('priceMin', $priceMin)
             ->andWhere('s.price <= :priceMax')
                 ->setParameter('priceMax', $priceMax)
-            /* ->andWhere('s.circulation_year >= :yearMin')
+            ->andWhere('s.circulation_year >= :yearMin')
                 ->setParameter('yearMin', $yearMin)
             ->andWhere('s.circulation_year <= :yearMax')
-                ->setParameter('yearMax', $yearMax) */
+                ->setParameter('yearMax', $yearMax)
             ->orderBy('s.create_date', 'DESC');
         return $qb->getQuery()->getResult();
     }
