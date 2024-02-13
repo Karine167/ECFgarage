@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -17,18 +18,28 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(min: 2, max: 50)]
+    #[Assert\NotBlank()]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(min: 2, max: 50)]
+    #[Assert\NotBlank()]
     private ?string $last_name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email()]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 180)]
     private ?string $email = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 20)]
     private ?string $telephon = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank()]
     private ?string $content = null;
 
     #[ORM\Column]
