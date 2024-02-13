@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\SecondHandCar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Select;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -78,20 +79,39 @@ class SecondHandCarRepository extends ServiceEntityRepository
         return $query->getOneOrNullResult();
     }
 
-//    /**
-//     * @return SecondHandCar[] Returns an array of SecondHandCar objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return SecondHandCar[] Returns an array of SecondHandCar objects, after filters
+    */
+    public function search($kmMin, $kmMax, $priceMin, $priceMax, $yearMin, $yearMax) 
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->andWhere('s.kilometers >= :kmMin')
+                ->setParameter('kmMin', $kmMin)
+            ->andWhere('s.kilometers <= :kmMax')
+                ->setParameter('kmMax', $kmMax)
+            ->andWhere('s.price >= :priceMin')
+                ->setParameter('priceMin', $priceMin)
+            ->andWhere('s.price <= :priceMax')
+                ->setParameter('priceMax', $priceMax)
+            /* ->andWhere('s.circulation_year >= :yearMin')
+                ->setParameter('yearMin', $yearMin)
+            ->andWhere('s.circulation_year <= :yearMax')
+                ->setParameter('yearMax', $yearMax) */
+            ->orderBy('s.create_date', 'DESC');
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return SecondHandCar[] Returns an array of SecondHandCar objects
+     */
+    public function findExtrema(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->Select ('min(s.kilometers), max(s.kilometers), min(s.price), max(s.price), min(s.circulation_year), max(s.circulation_year)')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?SecondHandCar
 //    {

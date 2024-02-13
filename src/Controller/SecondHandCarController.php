@@ -16,15 +16,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecondHandCarController extends AbstractController
 {
     #[Route('/advert', name: 'app_advert')]
-    public function index(SecondHandCarRepository $secondHandCarRepository,InfosRepository $infosRepository, GaleryRepository $galeryRepository): Response
-    {
+    public function index(SecondHandCarRepository $secondHandCarRepository,InfosRepository $infosRepository, GaleryRepository $galeryRepository, Request $request): Response
+    {   
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
         
         //recherche des infos de l'accueil, du header et du footer 
         $infos = $infosRepository->getInfos();
-        $secondHandCars = $secondHandCarRepository->findBy([], ['create_date' => 'DESC']);
+
+        // recherche des valeurs extrêmes 
+        $extrema = $secondHandCarRepository->findExtrema();
+        $kmMinCar = $extrema[0][1];
+        $kmMaxCar = $extrema[0][2]; 
+        $priceMinCar = $extrema[0][3];
+        $priceMaxCar = $extrema[0][4]; 
+        $yearMinCar = $extrema[0][5]; 
+        $yearMaxCar = $extrema[0][6];
+        
+        //récupération des choix de filtres
+        $kmMin = $request->get('kmMin');
+        $kmMax = $request->get('kmMax');
+        $priceMin = $request->get('priceMin');
+        $priceMax = $request->get('priceMax');
+        $yearMin = $request->get('yearMin');
+        $yearMax = $request->get('yearMax');
+
+        $secondHandCars = $secondHandCarRepository->search($kmMin, $kmMax, $priceMin, $priceMax, $yearMin, $yearMax);
+        
         // recherche de la première photo des véhicules
         $photos=[];
         foreach ($secondHandCars as $secondHandCar){
@@ -37,14 +56,22 @@ class SecondHandCarController extends AbstractController
             }
             $photos[$photoId] = $photoName;
         }
+
         //chemin pour les photos des véhicules
         $photoPath = $mappingsParams['galeries']['uri_prefix'].'/';
+
         return $this->render('advert/index.html.twig', [
             'secondHandCars' => $secondHandCars,
             'infos' => $infos,
             'imagePath' => $imagePath,
             'photos' => $photos,
-            'photoPath' => $photoPath
+            'photoPath' => $photoPath,
+            'kmMinCar' => $kmMinCar,
+            'kmMaxCar' => $kmMaxCar, 
+            'priceMinCar' => $priceMinCar,
+            'priceMaxCar' => $priceMaxCar,
+            'yearMinCar' => $yearMinCar,
+            'yearMaxCar' => $yearMaxCar
         ]);
     }
 
