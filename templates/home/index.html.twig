@@ -1,10 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row">
+    <div class="container mb-5">
         {% include "partials/_accueil.html.twig" %}
     </div>
-    <div class="row m-5 p-5">
+    <div class="container m-5 p-5 justify-content-center reviews">
+        <h3> Les commentaires de nos clients : </h3>
+        <div class="row">
+		<div class="col">
+			{% if averageRate %}
+			<div class="row align-items-center">
+                <div>Note moyenne:</div>
+				<div class="rate col-6">
+					{% for i in range(5, 1, -1) %}
+						<input disabled="disabled" type="radio" id="avgstar{{ i }}" name="avgrate" value="{{ i }}" {{ averageRate == i ? 'checked="checked"' : '' }}/>
+						<label for="avgstar{{ i }}" title="{{ i }} étoiles">{{ i }}
+							étoiles</label>
+					{% endfor %}
+				</div>
+			</div>
+			{% else %}
+				Nous n'avons pas encore reçu de Note. 
+			{% endif %}
+
+        {% if reviewsApproved|length > 0 %}
+            {% for review in reviewsApproved %}
+                {{review.rate}}  {{review.username }} : {{ review.content  }} 
+            {% endfor %}
+        {% else %}
+            Nous n'avons pas encore reçu de commentaires, n'hésitez pas à laisser le votre.
+        {% endif %}
         {% include "partials/review/_form.html.twig" %}
     </div>
 {% endblock %}

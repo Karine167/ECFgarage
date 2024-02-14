@@ -30,6 +30,11 @@ footer, header {
     background : #BDC6D9;
 }
 
+.reviews{
+    background: #E3E7F1;
+    border-radius: 0.5em;
+}
+
 .accordion-button{
     background-color: #E3E7F1;
     border: solid 1px #7391C8;
@@ -45,4 +50,44 @@ accordion-btn-show{
 .accordion-body{
     background: whitesmoke;
     font-size: 1.5em;
+}
+
+.rate {
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: left;
+}
+
+.rate input[type="radio"]{
+    display: none;
+}
+
+.rate:not(:checked)>label{
+    float: right;
+    width: 0.8em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color:#ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★';
+}
+
+.rate>input:checked~label{
+    color: #ffc700;
+}
+
+.rate.enabled:not(:checked) > label:hover,
+.rate.enabled:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate.enabled > input:checked + label:hover,
+.rate.enabled > input:checked + label:hover ~ label,
+.rate.enabled > input:checked ~ label:hover,
+.rate.enabled > input:checked ~ label:hover ~ label,
+.rate.enabled > label:hover ~ input:checked ~ label {
+    color: #c59b08;
 }

@@ -25,7 +25,7 @@ class Review
     private ?string $content = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $rate = null;
+    private ?int $rate = 1;
 
     #[ORM\Column]
     private ?bool $approved = false;

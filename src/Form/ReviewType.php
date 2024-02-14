@@ -21,11 +21,11 @@ class ReviewType extends AbstractType
         $builder
             ->add('rate', ChoiceType::class, [
                 'choices' => [
-                    '1' => '1',
-                    '2' => '2',
-                    '3' => '3',
-                    '4' => '4',
                     '5' => '5',
+                    '4' => '4',
+                    '3' => '3',
+                    '2' => '2',
+                    '1' => '1',
                 ], 
                 'label' => 'Note',
                 'label_attr' => [
