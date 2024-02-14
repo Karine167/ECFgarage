@@ -37,6 +37,7 @@ class ContactType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
+                    new Assert\Length(['min'=> 2, 'max' => 50])
                 ]
             ])
 
@@ -52,6 +53,7 @@ class ContactType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
+                    new Assert\Length(['min'=> 2, 'max' => 50])
                 ]
             ])
             ->add('email', EmailType::class, [

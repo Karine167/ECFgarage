@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include "partials/_accueil.html.twig" %}
+    <div class="row">
+        {% include "partials/_accueil.html.twig" %}
+    </div>
+    <div class="row m-5 p-5">
+        {% include "partials/review/_form.html.twig" %}
+    </div>
 {% endblock %}
 
