@@ -36,18 +36,23 @@ class SecondHandCarController extends AbstractController
         $kmMaxCar = $extrema[0][2]; 
         $priceMinCar = $extrema[0][3];
         $priceMaxCar = $extrema[0][4]; 
-        $yearMinCar =  $extrema[0][5]; 
-        $yearMaxCar = $extrema[0][6];
-        
-        //récupération des choix de filtres
-        $kmMin = $request->get('kmMin');
-        $kmMax = $request->get('kmMax');
-        $priceMin = $request->get('priceMin');
-        $priceMax = $request->get('priceMax');
-        $yearMin = $request->get('yearMin');
-        $yearMax = $request->get('yearMax');
-
-        $secondHandCars = $secondHandCarRepository->search($kmMin, $kmMax, $priceMin, $priceMax, $yearMin, $yearMax);
+        $yearMinCar =  date_parse_from_format('Y-m-d', $extrema[0][5])['year']; 
+        $yearMaxCar = date_parse_from_format('Y-m-d', $extrema[0][6])['year'];
+        dump($request);
+        if (!empty($request->getQueryString())){
+            //récupération des choix de filtres
+            $kmMin = $request->get('kmMin');
+            $kmMax = $request->get('kmMax');
+            $priceMin = $request->get('priceMin');
+            $priceMax = $request->get('priceMax');
+            $yearMin = $request->get('yearMin');
+            $yearMax = $request->get('yearMax');
+            $dateMin=$yearMin.'-01-01';
+            $dateMax=$yearMax.'-12-31';
+            $secondHandCars = $secondHandCarRepository->search($kmMin, $kmMax, $priceMin, $priceMax, $dateMin, $dateMax); 
+        }else {
+            $secondHandCars = $secondHandCarRepository->findBy([],['create_date'=> 'DESC']); 
+        }
         
         // recherche de la première photo des véhicules
         $photos=[];

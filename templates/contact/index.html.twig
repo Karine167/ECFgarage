@@ -15,7 +15,9 @@
     <div class="row m-4 ">
         <h4> Formulaire de contact </h4>
         <div class="col col-9 ms-5 ps-5">
-            {{form(form)}}
+            {{form_start(form)}}
+                {{form_widget(form)}}
+            {{form_end(form)}}
         </div>
     </div>
 {% endblock %}
