@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Brand;
 use App\Entity\Color;
+use App\Entity\Contact;
 use App\Entity\Energy;
 use App\Entity\Equipments;
 use App\Entity\Galery;
@@ -54,6 +55,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Options', 'fa-solid fa-plus', Options::class);
         yield MenuItem::linkToCrud('Photos', 'fa-regular fa-images', Galery::class);
         yield MenuItem::linkToCrud('Commentaires', 'fa-regular fa-comment-dots', Review::class);
+        yield MenuItem::linkToCrud('Demande de contact', 'fa-solid fa-phone', Contact::class);
         
     }
 }
