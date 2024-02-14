@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Review;
+use App\Form\ReviewType;
 use App\Repository\InfosRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -19,11 +21,16 @@ class HomeController extends AbstractController
         
         //recherche des infos de l'accueil, du header et du footer 
         $infos = $infosRepository->getInfos();
+
+        //reviews
+        $review = new Review();
+        $form = $this->createForm(ReviewType::class, $review);
     
         return $this->render('home/index.html.twig', [
             'director' => 'Vincent Parrot', 
             'infos' => $infos,
-            'imagePath' => $imagePath
+            'imagePath' => $imagePath,
+            'form'=> $form
         ]);
     }
     #[Route('/admin', name: 'app_admin')]
