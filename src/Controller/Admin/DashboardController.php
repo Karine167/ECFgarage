@@ -10,6 +10,7 @@ use App\Entity\Galery;
 use App\Entity\Infos;
 use App\Entity\Model;
 use App\Entity\Options;
+use App\Entity\Review;
 use App\Entity\SecondHandCar;
 use App\Entity\Type;
 use App\Entity\User;
@@ -52,6 +53,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Equipements', 'fa-solid fa-toolbox', Equipments::class);
         yield MenuItem::linkToCrud('Options', 'fa-solid fa-plus', Options::class);
         yield MenuItem::linkToCrud('Photos', 'fa-regular fa-images', Galery::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fa-regular fa-comment-dots', Review::class);
         
     }
 }

@@ -6,10 +6,10 @@
         </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionAccueil">
-        <div class="accordion-body">
-            <img src="{{imagePath ~ infos.1.imageName}}" class="card-img-top w-50" alt="Image présentation">
-            {{infos.1.content|raw}}
-        </div>
+            <div class="accordion-body">
+                <img src="{{imagePath ~ infos.1.imageName}}" class="card-img-top w-50" alt="Image présentation">
+                {{infos.1.content|raw}}
+            </div>
         </div>
     </div>
     <div class="accordion-item">
@@ -19,18 +19,18 @@
         </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
-        <div class="accordion-body d-flex flex-row">
-            <div class="col-5">
-                <img src="{{imagePath ~ infos.7.imageName}}" class="card-img-top w-30" alt="Image présentation">
+            <div class="accordion-body d-flex flex-row">
+                <div class="col-5">
+                    <img src="{{imagePath ~ infos.7.imageName}}" class="card-img-top w-30" alt="Image présentation">
+                </div>
+                <div class="col-6 ps-5">
+                    {{infos.7.content|raw}} <br>
+                    <hr>
+                    <strong> {{infos.5.title}}</strong>
+                    {{infos.5.content|raw}}
+                    <a href="{{ path('app_contact',{'ref': 'Entretien_Revision' })}}" class="btn btn-primary">Formulaire de contact</a>
+                </div>
             </div>
-            <div class="col-6 ps-5">
-                {{infos.7.content|raw}} <br>
-                <hr>
-                <strong> {{infos.5.title}}</strong>
-                {{infos.5.content|raw}}
-                <a href="{{ path('app_contact',{'ref': 'Entretien_Revision' })}}" class="btn btn-primary">Formulaire de contact</a>
-            </div>
-        </div>
         </div>
     </div>
     <div class="accordion-item">
@@ -40,18 +40,18 @@
         </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
-        <div class="accordion-body d-flex flex-row">
-            <div class="col-5">
-                <img src="{{imagePath ~ infos.9.imageName}}" class="card-img-top w-30" alt="Image présentation">
+            <div class="accordion-body d-flex flex-row">
+                <div class="col-5">
+                    <img src="{{imagePath ~ infos.9.imageName}}" class="card-img-top w-30" alt="Image présentation">
+                </div>
+                <div class="col-6 ps-5">
+                    {{infos.9.content|raw}} <br>
+                    <hr>
+                    <strong> {{infos.5.title}}</strong>
+                    {{infos.5.content|raw}}
+                    <a href="{{ path('app_contact',{'ref': 'Carrosserie' })}}" class="btn btn-primary">Formulaire de contact</a>
+                </div>
             </div>
-            <div class="col-6 ps-5">
-                {{infos.9.content|raw}} <br>
-                <hr>
-                <strong> {{infos.5.title}}</strong>
-                {{infos.5.content|raw}}
-                <a href="{{ path('app_contact',{'ref': 'Carrosserie' })}}" class="btn btn-primary">Formulaire de contact</a>
-            </div>
-        </div>
         </div>
     </div>
     <div class="accordion-item">
@@ -61,18 +61,18 @@
         </button>
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
-        <div class="accordion-body d-flex flex-row">
-            <div class="col-5">
-                <img src="{{imagePath ~ infos.11.imageName}}" class="card-img-top w-30" alt="Image présentation">
+            <div class="accordion-body d-flex flex-row">
+                <div class="col-5">
+                    <img src="{{imagePath ~ infos.11.imageName}}" class="card-img-top w-30" alt="Image présentation">
+                </div>
+                <div class="col-6 ps-5">
+                    {{infos.11.content|raw}} <br>
+                    <hr>
+                    <strong> {{infos.5.title}}</strong>
+                    {{infos.5.content|raw}}
+                    <a href="{{ path('app_contact',{'ref': 'Mecanique'})}}" class="btn btn-primary">Formulaire de contact</a>
+                </div>
             </div>
-            <div class="col-6 ps-5">
-                {{infos.11.content|raw}} <br>
-                <hr>
-                <strong> {{infos.5.title}}</strong>
-                {{infos.5.content|raw}}
-                <a href="{{ path('app_contact',{'ref': 'Mecanique'})}}" class="btn btn-primary">Formulaire de contact</a>
-            </div>
-        </div>
         </div>
     </div>
     <div class="accordion-item">
@@ -82,19 +82,19 @@
         </button>
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
-        <div class="accordion-body d-flex flex-row">
-            <div class="col-5">
-                <img src="{{imagePath ~ infos.13.imageName}}" class="card-img-top w-30" alt="Image présentation">
+            <div class="accordion-body d-flex flex-row">
+                <div class="col-5">
+                    <img src="{{imagePath ~ infos.13.imageName}}" class="card-img-top w-30" alt="Image présentation">
+                </div>
+                <div class="col-6 ps-5">
+                    {{infos.13.content|raw}} <br>
+                    <a href="{{ path('app_advert')}}" class="btn btn-primary">Accéder à la liste</a>
+                    <hr>
+                    <strong> {{infos.5.title}}</strong>
+                    {{infos.5.content|raw}}
+                    <a href="{{ path('app_contact',{'ref': 'Ventes' })}}" class="btn btn-primary">Formulaire de contact</a>
+                </div>
             </div>
-            <div class="col-6 ps-5">
-                {{infos.13.content|raw}} <br>
-                <a href="{{ path('app_advert')}}" class="btn btn-primary">Accéder à la liste</a>
-                <hr>
-                <strong> {{infos.5.title}}</strong>
-                {{infos.5.content|raw}}
-                <a href="{{ path('app_contact',{'ref': 'Ventes' })}}" class="btn btn-primary">Formulaire de contact</a>
-            </div>
-        </div>
         </div>
     </div>
 </div>
