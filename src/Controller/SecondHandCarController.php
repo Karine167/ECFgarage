@@ -47,9 +47,22 @@ class SecondHandCarController extends AbstractController
 
         // récupération des données du formulaire 
         $form->handleRequest($request);
+        $message="";
+        if ($data->kmMin > $data->kmMax){
+            $message = "Le nombre minimal de kilomètres  doit être inférieur au nombre maximal de kilomètres. ";
+        } 
+        if ($data->priceMin > $data->priceMax){
+            $message .= "Le prix minimal doit être inférieur au prix maximal. ";
+        } 
+        if ($data->yearMin > $data->yearMax){
+            $message .= "L'année minimale doit être inférieure à l'année maximale. ";
+        } 
+        if ($form->isSubmitted() && $form->isValid()){
+            $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
+        }else{
+            $secondHandCarsAll = $secondHandCarRepository->findBy([]);
+        }
 
-        $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
-        
         // pagination
         $nbreCars = count($secondHandCarsAll);
         $nbrePage = ceil($nbreCars / $nbre);
@@ -79,6 +92,7 @@ class SecondHandCarController extends AbstractController
 
         return $this->render('advert_list/index.html.twig', [
             'secondHandCars' => $secondHandCars,
+            'message' => $message,
             'infos' => $infos,
             'imagePath' => $imagePath,
             'photos' => $photos,

@@ -3,14 +3,11 @@
 namespace App\Form;
 
 use App\Data\SearchData;
-use App\Repository\SecondHandCarRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Range;
 
 class SearchForm extends AbstractType
 {
@@ -24,6 +21,9 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'km min',
                     'class' => 'col-2'
+                ],
+                'constraints' => [
+                    new Range(['min'=> 0 , 'max'=> 3000000])
                 ]
             ])
             ->add('kmMax', NumberType::class, [
@@ -32,6 +32,9 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'km max',
                     'class' => 'col-2'
+                ],
+                'constraints' => [
+                    new Range(['min'=> 0 , 'max'=> 3000000])
                 ]
             ])
             ->add('priceMin', NumberType::class, [
@@ -40,6 +43,9 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'prix min',
                     'class' => 'col-2'
+                ],
+                'constraints' => [
+                    new Range(['min'=> 0 , 'max'=> 100000000])
                 ]
             ])
             ->add('priceMax', NumberType::class, [
@@ -48,6 +54,9 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'prix max',
                     'class' => 'col-2'
+                ],
+                'constraints' => [
+                    new Range(['min'=> 0 , 'max'=> 100000000])
                 ]
             ])
             ->add('yearMin', NumberType::class, [
@@ -56,6 +65,9 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'année min',
                     'class' => 'col-2'
+                ],
+                'constraints' => [
+                    new Range(['min'=> 1770 , 'max'=> 2200])
                 ]
             ])
             ->add('yearMax', NumberType::class, [
@@ -64,6 +76,9 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'année max',
                     'class' => 'col-2'
+                ],
+                'constraints' => [
+                    new Range(['min'=> 1770 , 'max'=> 2200])
                 ]
             ])
             ;
