@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Equipments;
 use App\Entity\SecondHandCar;
+use App\Form\SearchForm;
 use App\Repository\EquipmentsRepository;
 use App\Repository\GaleryRepository;
 use App\Repository\InfosRepository;
@@ -30,36 +32,27 @@ class SecondHandCarController extends AbstractController
         //recherche des infos de l'accueil, du header et du footer 
         $infos = $infosRepository->getInfos();
         
-        // recherche des valeurs extrêmes 
+       /*  // recherche des valeurs extrêmes 
         $extrema = $secondHandCarRepository->findExtrema();
         $kmMinCar = $extrema[0][1];
         $kmMaxCar = $extrema[0][2]; 
         $priceMinCar = $extrema[0][3];
         $priceMaxCar = $extrema[0][4]; 
         $yearMinCar =  date_parse_from_format('Y-m-d', $extrema[0][5])['year']; 
-        $yearMaxCar = date_parse_from_format('Y-m-d', $extrema[0][6])['year'];
+        $yearMaxCar = date_parse_from_format('Y-m-d', $extrema[0][6])['year'];  */
         
-        if (!empty($request->getQueryString())){
-            //récupération des choix de filtres
-            $kmMin = $request->get('kmMin');
-            $kmMax = $request->get('kmMax');
-            $priceMin = $request->get('priceMin');
-            $priceMax = $request->get('priceMax');
-            $yearMin = $request->get('yearMin');
-            $yearMax = $request->get('yearMax');
-            $dateMin=$yearMin.'-01-01';
-            $dateMax=$yearMax.'-12-31';
-            $secondHandCarsAll = $secondHandCarRepository->search($kmMin, $kmMax, $priceMin, $priceMax, $dateMin, $dateMax); 
-        }else {
-            $secondHandCarsAll = $secondHandCarRepository->findBy([],['create_date'=> 'DESC']); 
-        }
+        //formulaire de recherche
+        $data = new SearchData();
+        $form = $this->createForm(SearchForm::class, $data);
+
+        // récupération des données du formulaire 
+        $form->handleRequest($request);
+
+        $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
         
         // pagination
         $nbreCars = count($secondHandCarsAll);
         $nbrePage = ceil($nbreCars / $nbre);
-        dump('$nbreCars ' . $nbreCars);
-        dump('nbre ' . $nbre);
-        dump('nbrePage '. $nbrePage);
         if ($nbrePage > 1) {
             $secondHandCars = array_slice($secondHandCarsAll,($page - 1)*$nbre ,$nbre);
             $isPaginated = true;
@@ -90,16 +83,11 @@ class SecondHandCarController extends AbstractController
             'imagePath' => $imagePath,
             'photos' => $photos,
             'photoPath' => $photoPath,
-            'kmMinCar' => $kmMinCar,
-            'kmMaxCar' => $kmMaxCar, 
-            'priceMinCar' => $priceMinCar,
-            'priceMaxCar' => $priceMaxCar,
-            'yearMinCar' => $yearMinCar,
-            'yearMaxCar' => $yearMaxCar,
             'nbrePage' => $nbrePage,
             'page' => $page,
             'nbre' => $nbre,
-            'isPaginated' => $isPaginated
+            'isPaginated' => $isPaginated, 
+            'form' => $form->createView()
         ]);
     }
 

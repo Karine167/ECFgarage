@@ -4,7 +4,10 @@
 
 {% block body %}
     
-    <form class="row flex-row justify-content-center">
+    <div class="row flex-row m-3">
+        {% include 'partials/advert/_filter.html.twig' with {form: form} only %}
+    </div>
+    {#  <form class="row flex-row justify-content-center">
         <div class="col-3 m-3">
             <h5>kilométrage :</h5>
                 <input name="kmMin" value="{{kmMinCar}}" min="0" max="{{kmMaxCar}}" placeholder="Minimum"><br>
@@ -21,7 +24,7 @@
                 <input name="yearMax"  value="{{yearMaxCar}}" min="{{yearMinCar}}" max="{{yearMaxCar}}" placeholder="Maximum">
         </div>
         <input type="submit" class= "col-3" value="Filtrer">
-    </form>
+    </form> #}
     
     <div class="row flex-row justify-content-center">
         {% for secondHandCar in secondHandCars %}

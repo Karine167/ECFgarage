@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\SecondHandCar;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Select;
@@ -82,24 +83,47 @@ class SecondHandCarRepository extends ServiceEntityRepository
     /**
      * @return SecondHandCar[] Returns an array of SecondHandCar objects, after filters
     */
-    public function search($kmMin, $kmMax, $priceMin, $priceMax, $yearMin, $yearMax) 
+    public function findBySearch(SearchData $search) : array
     {
-        $qb = $this->createQueryBuilder('s')
-            ->andWhere('s.kilometers >= :kmMin')
-                ->setParameter('kmMin', $kmMin)
-            ->andWhere('s.kilometers <= :kmMax')
-                ->setParameter('kmMax', $kmMax)
-            ->andWhere('s.price >= :priceMin')
-                ->setParameter('priceMin', $priceMin)
-            ->andWhere('s.price <= :priceMax')
-                ->setParameter('priceMax', $priceMax)
-            ->andWhere('s.circulation_year >= :yearMin')
-                ->setParameter('yearMin', $yearMin)
-            ->andWhere('s.circulation_year <= :yearMax')
-                ->setParameter('yearMax', $yearMax)
+        $query = $this
+            ->createQueryBuilder('s');
+        if (!empty($search->kmMin)){
+            $query = $query
+                ->andWhere('s.kilometers >= :kmMin')
+                ->setParameter('kmMin', $search->kmMin);
+        }
+        if (!empty($search->kmMax)){
+            $query = $query
+                ->andWhere('s.kilometers <= :kmMax')
+                ->setParameter('kmMax', $search->kmMax);
+        }
+        if (!empty($search->priceMin)){
+            $query = $query
+                ->andWhere('s.price >= :priceMin')
+                ->setParameter('priceMin', $search->priceMin);
+        }
+        if (!empty($search->priceMax)){
+            $query = $query
+                ->andWhere('s.price <= :priceMax')
+                ->setParameter('priceMax', $search->priceMax);
+        }
+        if (!empty($search->yearMin)){
+            $query = $query
+                ->andWhere('s.circulation_year >= :yearMin')
+                ->setParameter('yearMin', $search->yearMin.'-01-01');
+        }
+        if (!empty($search->yearMax)){
+            $query = $query
+                ->andWhere('s.circulation_year <= :yearMax')
+                ->setParameter('yearMax', $search->yearMax.'-12-31');  
+        }    
+            
+        $query = $query    
             ->orderBy('s.create_date', 'DESC');
-        return $qb->getQuery()->getResult();
+
+        return $query->getQuery()->getResult();
     }
+
 
     /**
      * @return SecondHandCar[] Returns an array of SecondHandCar objects
