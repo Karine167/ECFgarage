@@ -11,6 +11,7 @@ use App\Repository\GaleryRepository;
 use App\Repository\InfosRepository;
 use App\Repository\SecondHandCarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -48,21 +49,21 @@ class SecondHandCarController extends AbstractController
         // récupération des données du formulaire 
         $form->handleRequest($request);
         $message="";
-        if ($data->kmMin > $data->kmMax){
+        if ( $data->kmMax && $data->kmMin > $data->kmMax){
             $message = "Le nombre minimal de kilomètres  doit être inférieur au nombre maximal de kilomètres. ";
         } 
-        if ($data->priceMin > $data->priceMax){
+        if ($data->priceMax && $data->priceMin > $data->priceMax){
             $message .= "Le prix minimal doit être inférieur au prix maximal. ";
         } 
-        if ($data->yearMin > $data->yearMax){
+        if ($data->yearMax && $data->yearMin > $data->yearMax){
             $message .= "L'année minimale doit être inférieure à l'année maximale. ";
         } 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid() && !($request->isXmlHttpRequest())){
             $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
         }else{
             $secondHandCarsAll = $secondHandCarRepository->findBy([]);
         }
-
+        
         // pagination
         $nbreCars = count($secondHandCarsAll);
         $nbrePage = ceil($nbreCars / $nbre);
@@ -74,19 +75,26 @@ class SecondHandCarController extends AbstractController
             $isPaginated = false;
         }
         
-        // recherche de la première photo des véhicules
-        $photos=[];
-        foreach ($secondHandCars as $secondHandCar){
-            $photoId = $secondHandCar->getId();
-            $photo = $galeryRepository->findOneBy(['vehicle'=> $photoId]);
-            if ($photo){
-                $photoName = $photo->getImageName();
-            }else{
-                $photoName = null;
+        if (!($request->isXmlHttpRequest())){
+            // recherche de la première photo des véhicules
+            $photos=[];
+            foreach ($secondHandCars as $secondHandCar){
+                $photoId = $secondHandCar->getId();
+                $photo = $galeryRepository->findOneBy(['vehicle'=> $photoId]);
+                if ($photo){
+                    $photoName = $photo->getImageName();
+                }else{
+                    $photoName = null;
+                }
+                $photos[$photoId] = $photoName;
             }
-            $photos[$photoId] = $photoName;
         }
 
+        if ($request->isXmlHttpRequest()){
+            return new JsonResponse([
+                'content' => $this->renderView('advert_list/_Cars.html.twig', ['secondHandCars' => $secondHandCars])
+            ]);
+        }  
         //chemin pour les photos des véhicules
         $photoPath = $mappingsParams['galeries']['uri_prefix'].'/';
 
