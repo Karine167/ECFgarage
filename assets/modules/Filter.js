@@ -14,7 +14,7 @@ export default class Filter {
         }
         this.pagination = element.querySelector('.js-filter-page')
         this.content = element.querySelector('.js-filter-content')
-        this.form = element.querySelector('.js-filter-form')
+        this.btnFilter = element.querySelector('btn-filter')
         this.bindEvents()
     }
 
@@ -28,9 +28,9 @@ export default class Filter {
                 this.loadUrl(event.target.getAttribute('href'))
             }
         })
-        this.form.querySelectorAll('input').forEach(input =>{
-            input.addEventListener('change', this.loadForm.bind(this))
-        })
+
+        this.btnFilter.addEventListener('click', this.loadForm.bind(this)) 
+
     }
 
     async loadForm () {

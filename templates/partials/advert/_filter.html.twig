@@ -18,7 +18,10 @@
             {{form_row(form.yearMax)}}  
         </div>
         <div class="col-3 m-2">
-            <button type="submit" class="btn btn-primary w-100">Filtrer</button>
+            <button type="submit" class="btn btn-primary btn-filter w-100">Filtrer</button>
+        </div>
+        <div class="col-3 m-2">
+            <a href="{{ path('app_advert_list')}}" class="btn btn-primary initForm w-100">Réinitialiser</a>
         </div>
     </div>
 {{form_end(form)}}
