@@ -1,3 +1,20 @@
+.cantarell-regular, h5, h6, a, button {
+    font-family: "Cantarell", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.crimson-text-bold-italic, h1, h2, h3, h4 {
+    font-family: "Crimson Text", serif;
+    font-weight: 700;
+    font-style: italic;
+}
+.martel-sans-regular, body {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     background-color: #52688f;
     color: #071330;

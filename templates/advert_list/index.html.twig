@@ -11,10 +11,7 @@
         {% include 'partials/advert/_filter.html.twig' with {form: form} only %}
     </div>
     
-    <div class="row flex-row justify-content-center js-filter-content">
-        {# {% for secondHandCar in secondHandCars %}
-            {% include 'partials/advert/_advert_list.html.twig' %}
-        {% endfor %} #}
+    <div class="row flex-row ms-3 justify-content-center js-filter-content">
         {% include 'advert_list/_Cars.html.twig'%}
         {% if isPaginated %}
             <div class="row mt-3 js-filter-page">
