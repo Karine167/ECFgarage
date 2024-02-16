@@ -61,7 +61,7 @@ footer, header {
     border-radius: 0.5em;
 }
 
-.form-contact{
+.form-contact, .formLogin{
     background: #E3E7F1;
     border-radius: 0.5em;
 }
