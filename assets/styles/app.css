@@ -35,6 +35,11 @@ footer, header {
     border-radius: 0.5em;
 }
 
+.form-contact{
+    background: #E3E7F1;
+    border-radius: 0.5em;
+}
+
 .accordion-button{
     background-color: #E3E7F1;
     border: solid 1px #7391C8;
@@ -60,6 +65,10 @@ accordion-btn-show{
 
 .rate input[type="radio"]{
     display: none;
+}
+
+#formComment .rate input[type="radio"]{
+    display: block;
 }
 
 .rate:not(:checked)>label{

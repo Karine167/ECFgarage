@@ -28,7 +28,7 @@ class HomeController extends AbstractController
         //récupération des commentaires validés
         $averageRate = $reviewRepository->getAverageRate();
         $reviewsApproved = $reviewRepository->findReviewApproved();
-        dump($reviewsApproved);
+        
         //reviews
         $review = new Review();
         $form = $this->createForm(ReviewType::class, $review);
@@ -36,6 +36,11 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $entityManager->persist($review);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Votre commentaire a bien été pris en compte ! Il apparaîtra dans la liste des commentaires après approbation par nos services.'
+            );
+            return $this->redirectToRoute('app_home');
         }
     
         return $this->render('home/index.html.twig', [

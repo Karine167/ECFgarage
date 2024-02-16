@@ -44,8 +44,6 @@ class ContactController extends AbstractController
                 'Votre demande a bien été prise en compte !'
             );
             
-            $manager->persist($contact);
-            $manager->flush();
             return $this->redirectToRoute('app_contact', ['ref'=> 'formContact']);
         }
         return $this->render('contact/index.html.twig', [

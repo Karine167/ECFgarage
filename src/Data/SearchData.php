@@ -37,4 +37,8 @@ class SearchData
      */
     public $yearMax;
 
+    public function __construct(){
+
+    }
+
 }

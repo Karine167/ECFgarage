@@ -37,7 +37,7 @@ class ReviewType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
                 'required' => true
-            ])
+                ])
             ->add('username', TypeTextType::class, [
                 'attr' => [
                     'class' => 'form-control',
