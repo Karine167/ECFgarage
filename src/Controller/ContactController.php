@@ -28,11 +28,10 @@ class ContactController extends AbstractController
     
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
-
+        $ref = $request->attributes->get('_route_params')['ref'];
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $contact= $form->getData();
-            $ref = $request->attributes->get('_route_params')['ref'];
             if ($ref){
                 $contact->setContent($ref.' : '.$contact->getContent());
             }
@@ -49,6 +48,7 @@ class ContactController extends AbstractController
         return $this->render('contact/index.html.twig', [
             'infos' => $infos,
             'imagePath' => $imagePath,
+            'ref' => $ref,
             'form' => $form->createView()
         ]);
     }
