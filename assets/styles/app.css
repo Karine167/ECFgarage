@@ -14,6 +14,14 @@
     font-weight: 400;
     font-style: normal;
 }
+.btn-primary{
+    background-color: #7391C8;
+    border: solid 1.5px #7391C8;
+}
+.btn-primary:hover{
+    background-color: #52688f;
+    border: solid 1.5px #52688f;
+}
 
 body {
     background-color: #52688f;
@@ -45,6 +53,7 @@ footer {
 
 footer, header {
     background : #BDC6D9;
+    border-radius: 0.5em;
 }
 
 .reviews{
@@ -70,7 +79,7 @@ accordion-btn-show{
     border: solid 1px #7391C8;
 }
 .accordion-body{
-    background: whitesmoke;
+    background: #E3E7F1;
     font-size: 1.5em;
 }
 
@@ -86,6 +95,7 @@ accordion-btn-show{
 
 #formComment .rate input[type="radio"]{
     display: block;
+    border: #7391C8;
 }
 
 .rate:not(:checked)>label{

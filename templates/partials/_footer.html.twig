@@ -1,4 +1,4 @@
-<footer class="border-top px-3 row ">
+<footer class="border-top px-3 mx-3 row ">
     <div class="col-6">
         <div class="scheduleM d-lg-none">
             <h6>{{infos.3.title}}</h6>
@@ -21,13 +21,82 @@
         <a href="{{ path('app_contact',{'ref': 'contact' })}}" class="btn btn-primary">Formulaire de contact</a>
     </div>
 
-    <div class="col-12 d-flex mb-5 border-top">
+    <div class="col-12 d-flex mb-2 border-top">
         <ul class="nav ps-3 ">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary disabled">© 2024 Company, Inc</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+            <li class="nav-item px-2 disabled">© 2024 </li>
+            <li class="nav-item">
+                <a  href="" data-bs-toggle="modal" data-bs-target="#ModalMentionsLegales">
+                    -  Mentions Légales  -   
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-bs-toggle="modal" data-bs-target="#ModalPolitiqueConfidential">
+                    -  Politique de confidentialité  -
+                </a>
+            </li>
+            
+            
         </ul>
+    </div>
+    
+
+    <!-- Modal Mentions Legales -->
+    <div class="modal fade" id="ModalMentionsLegales" tabindex="-1" aria-labelledby="ModalMentionsLegalesLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalMentionsLegalesLabel">Mentions Legales du site :</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2> Conditions générales d'utilisation du site : </h2> 
+                Toutes les informations présentes sur ce site sont entièrement fictives, car il s'agit d'un site web élaboré dans le cadre d'un examen en cours de formation.
+                <hr>
+                <h2>Propriétaire du site :</h2>
+                    <h5>Garage Vincent Parrot </h5>
+                    {{infos.6.content|raw}}
+                <hr>
+                <h5>hébergeur du site internet :</h5>
+                    <h6>hostinger.fr</h6>
+                    Hébergement Web Premium, Cloud, VPS, Créateur de Sites Internet IA et Services d'Enregistrement de Noms de Domaine.
+                <hr>
+                <h5>Les mentions relatives à la propriété intellectuelle : </h5>
+                Toutes les images de ce site sont issues de banques d'images libres de droits et la plupart d'entre elles viennent du site Pixabay.
+                <hr>
+                <h5>Les mentions relatives à l'utilisation des données personnelles et à la gestion des cookies : </h5>
+                Voir notre politique de confidentialité
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Politique de confidentialité -->
+    <div class="modal fade" id="ModalPolitiqueConfidential" tabindex="-1" aria-labelledby="ModalPolitiqueConfidentialLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalPolitiqueConfidentialLabel">Politique de confidentialité :</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2>Utilisation des données personnelles :</h2> 
+                <p>Sur notre site, nous respectons le RGPD et le respect de votre vie privée est pour nous très important.</p> 
+                <p>Ainsi, nous avons choisi de ne pas utiliser de cookies et de ne pas récolter de données personnelles à votre insu.
+                Vous pouvez donc naviguer entre les différentes pages de notre site en toute quiétude.</p>
+                <p>Par contre, lorsque vous remplissez un <em>formulaire de contact</em>, pour obtenir de plus amples informations à propos d'un de nos services, ou d'un de nos véhicules d'oocasion, 
+                nous avons <em>besoin de vos coordonnées</em>. 
+                <br>En effet, ces informations sont nécessaires afin de pour pouvoir vous recontacter et répondre à votre demande. 
+                <br>Vos informations ne seront donc visibles que par les employés de notre garage, et nos employés sont soumis à des règles strictes de non dilvugation d'informations.
+                <br> <em>Vos informations seront donc conservées jusqu'à ce que votre demande ait été traitée.</em>
+                Elles seront ensuite détruites. 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
     </div>
 </footer>
 

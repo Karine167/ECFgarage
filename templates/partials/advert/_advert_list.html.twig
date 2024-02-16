@@ -2,7 +2,7 @@
     <div class="card" style="width: 18rem;"> 
             <h2> {{secondHandCar.reference}} </h2>
             {% if (photos[secondHandCar.Id])%}
-                <img src="{{photoPath ~ photos[secondHandCar.Id]}}" class="card-img-top" alt="...">  
+                <img src="{{photoPath ~ photos[secondHandCar.Id]}}" class="card-img-top" alt="photo de {{secondHandCar.model.brand}} {{secondHandCar.model}}">  
             {% else %}
                 <img src="{{photoPath ~ 'DefaultCar.png'}}" class="card-img-top ms-3 w-75" alt="photo de {{secondHandCar.model.brand}} {{secondHandCar.model}} absente">  
             {% endif %} 
