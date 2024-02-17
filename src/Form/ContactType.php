@@ -84,7 +84,8 @@ class ContactType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Length(['min'=> 2, 'max' => 20])
+                    new Assert\Length(['min'=> 2, 'max' => 20]),
+                    new Assert\Regex("/^[0-9]{10}$/")
                 ]
             ])
             ->add('content', TextareaType::class, [

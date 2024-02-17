@@ -6,6 +6,7 @@ use App\Repository\OptionsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OptionsRepository::class)]
 class Options
@@ -16,6 +17,8 @@ class Options
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 2, max: 255)]
+    #[Assert\NotBlank()]
     private ?string $optionName = null;
 
     #[ORM\ManyToMany(targetEntity: SecondHandCar::class, mappedBy: 'options')]

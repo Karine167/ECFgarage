@@ -22,7 +22,7 @@ class Galery
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
-    private ?string $imageName = 'construction-site-3279650_640.jpg';
+    private ?string $imageName = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;

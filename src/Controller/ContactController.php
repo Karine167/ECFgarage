@@ -44,6 +44,14 @@ class ContactController extends AbstractController
             );
             
             return $this->redirectToRoute('app_contact', ['ref'=> 'formContact']);
+        }else{
+            if ($form->isSubmitted() && !($form->isValid())){
+                $this->addFlash(
+                    'warning',
+                    'Certaines de vos données ne sont pas correctes, votre demande n\'a pas pu être prise en compte'
+                );
+                return $this->redirectToRoute('app_contact', ['ref'=> 'formContact']);
+            }
         }
         return $this->render('contact/index.html.twig', [
             'infos' => $infos,

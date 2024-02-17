@@ -36,6 +36,7 @@ class Contact
     #[ORM\Column(length: 20)]
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 20)]
+    #[Assert\Regex("/^[0-9]{10}$/")]
     private ?string $telephon = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -43,7 +44,7 @@ class Contact
     private ?string $content = null;
 
     #[ORM\Column]
-    private ?bool $acceptance = null;
+    private ?bool $acceptance = true;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
