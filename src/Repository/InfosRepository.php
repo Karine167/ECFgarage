@@ -7,6 +7,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use phpDocumentor\Reflection\Types\Null_;
 
+use function PHPUnit\Framework\isNull;
+
 /**
  * @extends ServiceEntityRepository<Infos>
  *
@@ -38,25 +40,25 @@ class InfosRepository extends ServiceEntityRepository
                 ->getResult();
         //Réorganisation des infos issues de la BDD
         $infosAccueil=[]; 
-        foreach ($infosTab as $infos){
-            $location =$infos->getLocation()->getId();
-            $title = $infos->getLabel();
-            $content = $infos->getContent();
-            $imageName = $infos->getImageName();
-            $infosAccueil[]=['location' => $location, 'title' => $title, 'content' => $content,
-            'imageName' => $imageName ];
+        if ($infosTab!=[]){
+            foreach ($infosTab as $infos){
+                $location =$infos->getLocation()->getId();
+                $title = $infos->getLabel();
+                $content = $infos->getContent();
+                $imageName = $infos->getImageName();
+                $infosAccueil[$location]=['location' => $location, 'title' => $title, 'content' => $content,
+                'imageName' => $imageName ];
+            }
         }
-        
+        dump($infosAccueil);
         // Complétion pour les données manquantes
         $infosAccueilFinal=[];
-        $j=0 ;
-        for ($i=0; $i<=15; $i++){
-            if ($infosAccueil[$j]['location'] != $i) {
-                $infosAccueilFinal[] = ['location' => $i, 'title' => 'En Construction', 'content' => 'En construction',
+        for ($i=1; $i<=15; $i++){
+            if (!(array_key_exists($i,$infosAccueil))) {
+                $infosAccueilFinal[$i] = ['location' => $i, 'title' => 'En Construction', 'content' => 'En construction',
                 'imageName' => null ];
             } else {
-                $infosAccueilFinal[] = $infosAccueil[$j];
-                $j +=1;
+                $infosAccueilFinal[$i] = $infosAccueil[$i];
             }
         }
         
