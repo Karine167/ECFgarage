@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Flex\Response as FlexResponse;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: SecondHandCarRepository::class)]
@@ -23,27 +24,32 @@ class SecondHandCar
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(min: 2, max: 255)]
     private ?string $reference = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 12, scale: 2)]
+    #[Assert\Range(min: 0, max: 100000000)]
     private ?string $price = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 0, max: 3000000)]
     private ?int $kilometers = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $circulation_year = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[Assert\Range(min: 1, max: 40)]
     private ?int $fiscal_power = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[Assert\Range(min: 1, max: 2500)]
     private ?int $din_power = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $doors = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $seats = null;
 
     #[ORM\Column]
@@ -59,11 +65,13 @@ class SecondHandCar
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicle')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank()]
     private ?Type $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicle')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank()]
     private ?Model $model = null;
 
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Galery::class)]
