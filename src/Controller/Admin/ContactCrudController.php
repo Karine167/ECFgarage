@@ -27,7 +27,7 @@ class ContactCrudController extends AbstractCrudController
         yield TextField::new('first_name', 'Prénom');
         yield TextField::new('last_name', 'Nom');
         yield EmailField::new('email', 'Adresse email');
-        yield TextField::new('telephon', 'N° de téléphone');
+        yield TextField::new('telephon', 'N° de téléphone: 0000000000');
         yield TextareaField::new('content','Demande de contact');
         yield TextareaField::new('comment','Commentaires (si non finalisée)');
         yield AssociationField::new('user', 'Personne référente');

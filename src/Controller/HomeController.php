@@ -41,6 +41,14 @@ class HomeController extends AbstractController
                 'Votre commentaire a bien été pris en compte ! Il apparaîtra dans la liste des commentaires après approbation par nos services.'
             );
             return $this->redirectToRoute('app_home');
+        }else{
+            if ($form->isSubmitted() && !($form->isValid())){
+                $this->addFlash(
+                    'warning',
+                    'Certaines de vos données ne sont pas correctes, votre commentaire n\'a pas pu être prise en compte'
+                );
+                return $this->redirectToRoute('app_home');
+            }
         }
     
         return $this->render('home/index.html.twig', [

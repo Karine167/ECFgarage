@@ -77,6 +77,7 @@ class ContactType extends AbstractType
                     'class' => 'form-control',
                     'minlenght' => '2',
                     'maxlenght' => '20',
+                    'placeholder'=> '0000000000'
                 ],
                 'label' => 'Numéro de Télephone',
                 'label_attr' => [
