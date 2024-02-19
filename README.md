@@ -55,20 +55,42 @@ Elle utilise une base de données de type mysql (MariaDB).
 ## Installation
 ***
 **Pour l'installation en local :**
-
+***
 # Cloner le projet pour télécharger son contenu
-$ cd projects/ (se placer dans votre dossier)
-$ git clone ... (voir le lien sur GitHub)
-
-# Faites en sorte que Composer installe les dépendances du projet dans le répertoire vendor/
+Ouvrir un terminal et se placer dans le bon dossier :
+$ cd projects/ (se placer dans votre dossier, nom à modifier)
+Cloner le repository de GitHub :
+$ git clone 
+***
+# Faire en sorte que Composer installe les dépendances du projet dans le répertoire vendor/
+On ouvre le dossier du projet
 $ cd my_project_name/  
+On lance l'installation des dépendances à l'aide de composer
 $ composer install
-
-# Maintenant Composer va vous demander les valeurs pour les paramètres qui ne sont pas définis
-$ ...
-
-
-## Améliorations
+***
+# Maintenant, il faut s'occuper de la base de données
+modifier dans le fichier .env le DATABASE_URL pour pouvoir créer une nouvelle base de données :
+par ex : 
+DATABASE_URL="mysql://username:password@127.0.0.1:3306/DbName?ServerVersion=8.0.32&charset=utf8mb4"
+***
+Créer une nouvelle base de données avec :
+$ symfony console doctrine:database:create
+***
+Importer la base de données :
+$ php bin/console doctrine:migrations:migrate
+***
+Si vous avez des soucis avec l'importation de la base de données, j'ai mis le fichier d'importation (ecfgarage.sql) dans le dossier public, il faudra donc ensuite passer par phpMyadmin par exemple pour importer la base de données. 
+***
+# Lancer le server de symfony 
+$ symfony server:start
+et le site devrait normalement fonctionner.
+***
+# Connection en tant qu'admin :
+email : vparrot@test.com
+Mot de passe : VParrot
+***
+***
+## Améliorations à prévoir
 ***
 L'amélioration la plus importante à prévoir, serait d'améliorer la saisie des annonces des véhicules en regroupant toutes les entrées de données dans un seul formulaire.
 Une autre amélioration à envisager est de modifier le nombre de véhicule présenté par page en fonction de l'appareil (mobile, tablette ou desktop), afin que les pages soient bien remplies dans chaque situation.
