@@ -18,29 +18,29 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\Length(min: 2, max: 50)]
-    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50, minMessage: 'Le prénom doit comporter au moins deux caractères.', maxMessage: 'Le prénom ne doit pas comporter plus de 50 caractères.')]
+    #[Assert\NotBlank(message:'Le prénom ne doit pas être vide.')]
     private ?string $first_name = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\Length(min: 2, max: 50)]
-    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50, minMessage: 'Le nom doit comporter au moins deux caractères.', maxMessage: 'Le nom ne doit pas comporter plus de 50 caractères.')]
+    #[Assert\NotBlank(message:'Le nom ne doit pas être vide.')]
     private ?string $last_name = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Email()]
-    #[Assert\NotBlank()]
-    #[Assert\Length(min: 2, max: 180)]
+    #[Assert\Email(message: 'cette adresse email n\'est pas valide.' )]
+    #[Assert\NotBlank(message:'L\'email ne doit pas être vide.')]
+    #[Assert\Length(min: 2, max: 180, minMessage: 'L\'email doit comporter au moins deux caractères.', maxMessage: 'L\'email ne doit pas comporter plus de 180 caractères.')]
     private ?string $email = null;
 
     #[ORM\Column(length: 20)]
-    #[Assert\NotBlank()]
-    #[Assert\Length(min: 2, max: 20)]
-    #[Assert\Regex("/^[0-9]{10}$/")]
+    #[Assert\NotBlank(message:'Le numéro de téléphone ne doit pas être vide.')]
+    #[Assert\Length(min: 2, max: 20, minMessage:'Le numéro de téléphone doit comporter au moins deux chiffres.', maxMessage: 'Le numéro de téléphone ne doit pas comporter plus de 20 chiffres.' )]
+    #[Assert\Regex("/^[0-9]{10}$/", message:'Le numéro de téléphone doit être composé de 10 chiffres.')]
     private ?string $telephon = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message:'Le corps du message ne doit pas être vide.')]
     private ?string $content = null;
 
     #[ORM\Column]

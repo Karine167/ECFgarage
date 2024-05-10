@@ -47,10 +47,6 @@ class ReviewType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-2 fs-4 fw-bold'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min'=> 2, 'max' => 50])
-                ]
                 ])
             ->add('content', TextareaType::class, [
                 'attr' => [
@@ -60,9 +56,6 @@ class ReviewType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-2 fs-4 fw-bold'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
                 ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

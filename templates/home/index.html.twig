@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="row m-4 ">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">
+                <h6>{{message}}<h6>
+            </div>
+        {% endfor %}
+    </div>
     <div class="container mb-5">
         {% include "partials/_accueil.html.twig" %}
     </div>
@@ -49,13 +56,6 @@
             {% endif %}
         </div>
         <div class="row" id="formComment">    
-            <div class="row m-4 ">
-                {% for message in app.flashes('success') %}
-                    <div class="alert alert-success mt-4">
-                        <h6>{{message}}<h6>
-                    </div>
-                {% endfor %}
-            </div>
             {% include "partials/review/_form.html.twig" %}
         </div>
     </div>

@@ -35,10 +35,6 @@ class ContactType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min'=> 2, 'max' => 50])
-                ]
             ])
 
             ->add('last_name', TypeTextType::class, [
@@ -51,10 +47,6 @@ class ContactType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length(['min'=> 2, 'max' => 50])
-                ]
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
@@ -66,11 +58,6 @@ class ContactType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Email(),
-                    new Assert\Length(['min'=> 2, 'max' => 180])
-                ]
             ])
             ->add('telephon', TelType::class, [
                 'attr' => [

@@ -16,12 +16,12 @@ class Review
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\Length(min: 2, max: 50)]
-    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50, minMessage: 'Le nom d\'utilisateur doit comporter au moins deux caractères.', maxMessage: 'Le nom d\'utilisateur ne doit pas comporter plus de 50 caractères.')]
+    #[Assert\NotBlank(message:'Le nom d\'utilisateur ne doit pas être vide.')]
     private ?string $username = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message:'Le commentaire ne doit pas être vide.')]
     private ?string $content = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
