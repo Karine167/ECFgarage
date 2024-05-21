@@ -79,6 +79,7 @@ class HomeController extends AbstractController
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
+                'page' => 'admin/accueilNewDasboard.html.twig',
             ]);
         } else {
             return $this->render('admin/newDashboardError.html.twig', [

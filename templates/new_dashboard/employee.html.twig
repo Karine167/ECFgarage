@@ -1,20 +1,24 @@
-{% extends 'admin/newDashboard.html.twig' %}
+<div class="card" style="width: auto"> 
+    <h2> Gestion des employés et des administrateurs:</h2>
+    
+    <div class="card-body">
+        <h5 class="card-title">Liste des employés :</h5>
+        <hr>
+        <p class="card-text">
+            {% for employee in employees %}
+                <div class="container-fluid p-3 justify-content-end">
+                    {{employee.id}} : <em> {{employee}} </em>,<strong> email : </strong> {{employee.email}}
+                    <a href="#" class="col col-2 p-1 btn btn-primary">Consulter</a>
+                    <a href="#" class="col col-2 p-1 btn btn-primary">Editer</a>
+                    <a href="#" class="col col-2 p-1 btn btn-primary">supprimer</a>
+                </div>
+                <hr>
+            {% endfor %}
+        </p>
+    </div>
 
-{% block title %}Hello NewDashboardController!{% endblock %}
-
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>la page des employés</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/rudek/Documents/5-DEV WEB/0-ECF Garage/Documents ECF/ECFGarageParrot/src/Controller/NewDashboardController.php'|file_link(0) }}">src/Controller/NewDashboardController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/rudek/Documents/5-DEV WEB/0-ECF Garage/Documents ECF/ECFGarageParrot/templates/new_dashboard/index.html.twig'|file_link(0) }}">templates/new_dashboard/index.html.twig</a></code></li>
-    </ul>
+    <div class="card-footer">
+        <a href="#" class="btn btn-primary">Créer un employé</a>
+    </div>
 </div>
-{% endblock %}
+                
