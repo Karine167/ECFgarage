@@ -60,4 +60,22 @@ class HomeController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    #[Route('/newAdmin', name: 'app_newAdmin')]
+    public function newAdmin(InfosRepository $infosRepository, Security $security): Response
+    {
+        //recherche du path du logo
+        $mappingsParams = $this->getParameter('vich_uploader.mappings');
+        $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
+        
+        //recherche des infos de l'accueil, du header et du footer 
+        $infos = $infosRepository->getInfos();
+
+        $user = $security->getUser();
+        return $this->render('admin/newDashboard.html.twig', [
+            'user' => $user,
+            'infos' => $infos,
+            'imagePath' => $imagePath,
+        ]);
+    }
 }

@@ -58,4 +58,5 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Demande de contact', 'fa-solid fa-phone', Contact::class);
         
     }
+
 }

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+{% block title %} Administration du site {% endblock %}
+
+{% block body %}
+    <div class="row flex-row ms-3 justify-content-center">
+        
+        <div class="col col-2 m-3" >
+            <ul>
+                <li> Employes </li>
+                <li> Annonces véhicules </li>
+            </ul>
+        </div >
+        <div class="col col-9 m-3 js-filter-content">
+            <h1> Bienvenue sur la nouvelle interface d'administration du site : </h1>
+
+            <div class="col my-2">
+                <div class="card" style="width: auto"> 
+                    <h2> nom de la page consultée :</h2>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">titre</h5>
+                        <p class="card-text">
+                            
+                        </p>
+                    </div>
+                
+                    <div class="card-footer">
+                        des liens ??
+                        <a href="#" class="btn btn-primary">nom du lien</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
