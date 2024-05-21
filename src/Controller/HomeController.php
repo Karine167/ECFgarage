@@ -7,6 +7,7 @@ use App\Form\ReviewType;
 use App\Repository\InfosRepository;
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PharIo\Manifest\ContainsElement;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +63,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/newAdmin', name: 'app_newAdmin')]
+    
     public function newAdmin(InfosRepository $infosRepository, Security $security): Response
     {
         //recherche du path du logo
@@ -72,10 +74,18 @@ class HomeController extends AbstractController
         $infos = $infosRepository->getInfos();
 
         $user = $security->getUser();
-        return $this->render('admin/newDashboard.html.twig', [
-            'user' => $user,
-            'infos' => $infos,
-            'imagePath' => $imagePath,
-        ]);
+        if ($user && in_array('ROLE_EMPLOYEE', $user->getRoles())  ){
+            return $this->render('admin/newDashboard.html.twig', [
+                'user' => $user,
+                'infos' => $infos,
+                'imagePath' => $imagePath,
+            ]);
+        } else {
+            return $this->render('admin/newDashboardError.html.twig', [
+                'user' => $user,
+                'infos' => $infos,
+                'imagePath' => $imagePath,
+            ]);
+        };
     }
 }
