@@ -1,0 +1,47 @@
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="card" style="width: auto"> 
+        <div class="row card-header">
+            <div class="col col-9 d-flex">
+                <h2 class="card-title">{{ is_create ? 'Ajouter un employé : ': 'Modifier un employé :'}} </h2>
+            </div>
+            <div class="col col-2 d-flex">
+                <a href="{{ path('admin_employee')}}" class="btn btn-primary">Revenir à la liste</a>
+            </div>
+        </div>
+        <div class="card-body">
+            
+            <hr>
+            {{form_start(form)}}
+            {#     
+            <div class="form-control">
+                {{ form_label(form.lastname) }}
+                {{ form_widget(form.lastname) }}
+
+                <small>{{ form_help(form.lastname) }}</small>
+
+                <div class="form-error">
+                    {{ form_errors(form.lastname) }}
+                </div>
+            </div> #}
+            {{form_row(form.lastname)}}
+            {{form_row(form.firstname)}}
+            {{form_row(form.email)}}
+            {{form_row(form.telephon)}}
+            {{form_row(form.address)}}
+            {{form_row(form.roles)}}
+            {{form_row(form.password)}}
+
+            {{ form_rest(form) }}
+
+            {{form_end(form)}}
+        </div>
+        
+    </div>
+{% endif %}
+    
+
+    
+
+        
+        
+    

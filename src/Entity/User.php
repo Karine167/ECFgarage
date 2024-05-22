@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -30,6 +30,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\PasswordStrength([
+        'minScore' => PasswordStrength::STRENGTH_VERY_STRONG, // Very strong password required
+        'message' => 'Votre mot de passe est trop facile à deviner. Vous devez choisir un mot de passe plus fort.'
+    ])]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]

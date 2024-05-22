@@ -6,6 +6,10 @@ use App\Entity\Contact;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,16 +19,29 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
-            ->add('password')
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'ROLE_ADMIN' => 'ROLE_ADMIN',
+                    'ROLE_EMPLOYEE' => 'ROLE_EMPLOYEE',
+                ],
+                'multiple' => true])
             ->add('firstname')
             ->add('lastname')
             ->add('telephon')
             ->add('address')
-            ->add('contacts', EntityType::class, [
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options'  => ['label' => 'Mot de passe', 'hash_property_path' => 'password'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
+                'mapped' => false,
+            ])
+            /* ->add('contacts', EntityType::class, [
                 'class' => Contact::class,
 'choice_label' => 'id',
 'multiple' => true,
+            ]) */
+            ->add('save', SubmitType::class, [
+                'label' => 'Enregistrer',
             ])
         ;
     }
