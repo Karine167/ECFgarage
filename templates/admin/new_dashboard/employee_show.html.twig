@@ -1,0 +1,28 @@
+<div class="card" style="width: auto"> 
+    <h2> Informations sur l'employé : </h2>
+    
+    <div class="card-body">
+        <h3 class="card-title">{{ employee }}</h3>
+        <hr>
+        <p class="card-text">
+            <span class="fw-bold"> Nom : </span> {{employee.lastname}}
+        </p>
+        <p class="card-text">
+            <span class="fw-bold"> Prénom : </span> {{employee.firstname}}
+        </p>
+        <p class="card-text">
+            <span class="fw-bold"> Email : </span> {{employee.email}}
+        </p>
+        <p class="card-text">
+            <span class="fw-bold"> Nom : </span> {{employee.telephon}}
+        </p>
+        <p class="card-text">
+            <span class="fw-bold"> Adresse : </span> {{employee.address}}
+        </p>
+    </div>
+    <div class="card-footer">
+        <a href="{{ path('admin_employee')}}" class="btn btn-primary">Liste</a>
+        <a href="#" class="btn btn-primary">Editer</a>
+        <a href="#" class="btn btn-primary">Supprimer</a>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="card" style="width: auto"> 
+    <h2> Gestion des employés et des administrateurs:</h2>
+    
+    <div class="card-body">
+        <h3 class="card-title">Liste des employés :</h3>
+        <hr>
+        <p class="card-text">
+            {% for employee in employees %}
+                <div class="d-flex p-3">
+                    <div class="col col-8 justify-content-start">
+                        {{employee.id}} : <em> {{employee}} </em>,<strong> email : </strong> {{employee.email}}
+                    </div>
+                    <div class="col col-4 flex  ms-5 justify-content-center">
+                        <a href="{{ path('admin_employee_show',{'id': employee.id})}}" class="p-1 btn btn-primary">Consulter</a>
+                        {# <a href="{{ path('admin_employee_edit',{'id': employee.id})}}" class="p-1 btn btn-primary">Editer</a>
+                        <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="p-1 btn btn-primary">supprimer</a> #}
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </p>
+    </div>
+
+    <div class="card-footer">
+        <a href="#" class="btn btn-primary">Créer un employé</a>
+    </div>
+</div>
+                

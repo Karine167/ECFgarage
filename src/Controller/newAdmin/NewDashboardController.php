@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\newAdmin;
 
 use App\Repository\InfosRepository;
 use App\Repository\UserRepository;
@@ -14,7 +14,7 @@ class NewDashboardController extends AbstractController
     #[Route('/new_dashboard/employee', name: 'admin_employee')]
     public function employeeManagement(InfosRepository $infosRepository,UserRepository $userRepository, Security $security): Response
     {
-        $page = 'new_dashboard/employee.html.twig';
+        $page = 'admin/new_dashboard/employee.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -27,7 +27,7 @@ class NewDashboardController extends AbstractController
         dump($employees);
         $user = $security->getUser();
         if ($user && in_array('ROLE_ADMIN', $user->getRoles())  ){
-            return $this->render('admin/newDashboard.html.twig', [
+            return $this->render('admin/new_dashboard/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
@@ -35,12 +35,11 @@ class NewDashboardController extends AbstractController
                 'employees' => $employees,
             ]);
         } else {
-            return $this->render('admin/newDashboardError.html.twig', [
+            return $this->render('admin/new_dashboard/newDashboardError.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
             ]);
-        };
-        
+        };   
     }
 }

@@ -75,14 +75,14 @@ class HomeController extends AbstractController
 
         $user = $security->getUser();
         if ($user && in_array('ROLE_EMPLOYEE', $user->getRoles())  ){
-            return $this->render('admin/newDashboard.html.twig', [
+            return $this->render('admin/new_dashboard/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
-                'page' => 'admin/accueilNewDasboard.html.twig',
+                'page' => 'admin/new_dashboard/accueilNewDasboard.html.twig',
             ]);
         } else {
-            return $this->render('admin/newDashboardError.html.twig', [
+            return $this->render('admin/new_dashboard/newDashboardError.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
