@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NewDashboardController extends AbstractController
 {
-    #[Route('/new_dashboard/employee', name: 'admin_employee')]
+    #[Route('/new_dashboard/employee/list', name: 'admin_employee_list')]
     public function employeeManagement(InfosRepository $infosRepository,UserRepository $userRepository, Security $security): Response
     {
         $page = 'admin/new_dashboard/employee.html.twig';

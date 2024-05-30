@@ -50,7 +50,7 @@ class InfosRepository extends ServiceEntityRepository
                 'imageName' => $imageName ];
             }
         }
-        dump($infosAccueil);
+        
         // Complétion pour les données manquantes
         $infosAccueilFinal=[];
         for ($i=1; $i<=15; $i++){

@@ -7,7 +7,15 @@
             <a href="{{ path('admin_employee_create')}}" class="btn btn-primary">Créer un employé</a>
         </div>
     </div>
+    
     <div class="row card-body">
+        <div class="row m-4 ">
+            {% for message in app.flashes('danger') %}
+                <div class="alert alert-success mt-4">
+                    <h6>{{message}}<h6>
+                </div>
+            {% endfor %}
+        </div>
         <h3 class="card-title">Liste des employés :</h3>
         <hr>
         <p class="card-text">

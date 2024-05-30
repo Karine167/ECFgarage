@@ -5,11 +5,17 @@
                 <h2 class="card-title">{{ is_create ? 'Ajouter un employé : ': 'Modifier un employé :'}} </h2>
             </div>
             <div class="col col-2 d-flex">
-                <a href="{{ path('admin_employee')}}" class="btn btn-primary">Revenir à la liste</a>
+                <a href="{{ path('admin_employee_list')}}" class="btn btn-primary">Revenir à la liste</a>
             </div>
         </div>
         <div class="card-body">
-            
+            <div class="row m-4 ">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-success mt-4">
+                        <h6>{{message}}<h6>
+                    </div>
+                {% endfor %}
+            </div>
             <hr>
             {{form_start(form)}}
             {#     
