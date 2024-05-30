@@ -9,9 +9,14 @@
     </div>
     
     <div class="row card-body">
-        <div class="row m-4 ">
+        <div class="col col-11 m-4 ">
             {% for message in app.flashes('danger') %}
-                <div class="alert alert-success mt-4">
+                <div class="alert alert-success m-4">
+                    <h6>{{message}}<h6>
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success m-4">
                     <h6>{{message}}<h6>
                 </div>
             {% endfor %}
@@ -27,7 +32,7 @@
                     <div class="col col-4 flex  ms-5 justify-content-center">
                         <a href="{{ path('admin_employee_show',{'id': employee.id})}}" class="p-1 btn btn-primary">Consulter</a>
                         <a href="{{ path('admin_employee_edit',{'id': employee.id})}}" class="p-1 btn btn-primary">Editer</a>
-                        {# <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="p-1 btn btn-primary">supprimer</a> #} 
+                        <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="p-1 btn btn-primary">supprimer</a>  
                     </div>
                 </div>
                 <hr>
