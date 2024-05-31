@@ -33,28 +33,27 @@ class UserType extends AbstractType
             ->add('lastname', TextType::class, [
                 'label' => 'Nom'
             ])
-            ->add('telephon',NumberType::class, [
+            ->add('telephon',TextType::class, [
                 'label' => 'N° de téléphone'
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse'
-            ]);
-            if ($options['require_password']){
-                $builder->add('password', RepeatedType::class, [
-                    'required' => $options['require_password'],
-                    'type' => PasswordType::class,
-                    'first_options'  => ['label' => 'Mot de passe', 'hash_property_path' => 'password'],
-                    'second_options' => ['label' => 'Confirmation du mot de passe'],
-                    'mapped' => false,
-                ]);
-            }
+            ])
+            
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'first_options'  => ['label' => 'Mot de passe', 'hash_property_path' => 'password'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
+                'mapped' => false,
+                'required' => $options['require_password'],
+            ])
         
             /* ->add('contacts', EntityType::class, [
                 'class' => Contact::class,
                 'choice_label' => 'id',
                 'multiple' => true,
             ]) */
-            $builder->add('save', SubmitType::class, [
+            ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer',
             ])
         ;
