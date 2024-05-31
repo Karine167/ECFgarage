@@ -70,7 +70,10 @@ class EmployeeCrudController extends AbstractController
         $user = $security->getUser();
 
         $employeeToModify = $employee ?? new User(); 
-        $form = $this->createForm(UserType::class, $employeeToModify);
+        
+        $form = $this->createForm(UserType::class, $employeeToModify, [
+            'require_password' => $isCreate,
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
