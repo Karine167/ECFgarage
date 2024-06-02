@@ -20,10 +20,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecondHandCarController extends AbstractController
 {
-    #[Route('/advert_list/{page?1}/{nbre?4}', name: 'app_advert_list')]
+    #[Route('/advert_list/{page?1}', name: 'app_advert_list')]
     public function index(SecondHandCarRepository $secondHandCarRepository,InfosRepository $infosRepository, GaleryRepository $galeryRepository,
-    Request $request, SessionInterface $sessionInterface, $page, $nbre): Response
+    Request $request, SessionInterface $sessionInterface, $page): Response
     {   
+        $nbre = 4;
         //récupération des données de la précédente recherche
         $sessionInterface->set('previous_url', $request->getUri());
 
@@ -33,15 +34,6 @@ class SecondHandCarController extends AbstractController
         
         //recherche des infos de l'accueil, du header et du footer 
         $infos = $infosRepository->getInfos();
-        
-       /*  // recherche des valeurs extrêmes 
-        $extrema = $secondHandCarRepository->findExtrema();
-        $kmMinCar = $extrema[0][1];
-        $kmMaxCar = $extrema[0][2]; 
-        $priceMinCar = $extrema[0][3];
-        $priceMaxCar = $extrema[0][4]; 
-        $yearMinCar =  date_parse_from_format('Y-m-d', $extrema[0][5])['year']; 
-        $yearMaxCar = date_parse_from_format('Y-m-d', $extrema[0][6])['year'];  */
         
         //formulaire de recherche
         $data = new SearchData();
@@ -60,14 +52,30 @@ class SecondHandCarController extends AbstractController
             $message .= "L'année minimale doit être inférieure à l'année maximale. ";
         } 
         if ($form->isSubmitted() && $form->isValid() && !($request->isXmlHttpRequest())){
+            $kmMin = $data->kmMin;
+            $kmMax = $data->kmMax;
+            $priceMin = $data->priceMin;
+            $priceMax = $data->priceMax;
+            $yearMin = $data->yearMin;
+            $yearMax = $data->yearMax;
             $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
         }else{
+            // initialisation des valeurs du filtre
+            $kmMin = null;
+            $kmMax = null;
+            $priceMin = null;
+            $priceMax = null;
+            $yearMin = null;
+            $yearMax = null;
             $secondHandCarsAll = $secondHandCarRepository->findBy([]);
         }
         
         // pagination
         $nbreCars = count($secondHandCarsAll);
         $nbrePage = ceil($nbreCars / $nbre);
+        if ($nbrePage<$page) {
+            $page = 1;
+        }
         if ($nbrePage > 1) {
             $secondHandCars = array_slice($secondHandCarsAll,($page - 1)*$nbre ,$nbre);
             $isPaginated = true;
@@ -110,7 +118,13 @@ class SecondHandCarController extends AbstractController
             'page' => $page,
             'nbre' => $nbre,
             'isPaginated' => $isPaginated, 
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'kmMin' => $kmMin,
+            'kmMax' => $kmMax,
+            'priceMin' => $priceMin,
+            'priceMax' => $priceMax,
+            'yearMin' => $yearMin,
+            'yearMax' => $yearMax,
         ]);
     }
 
