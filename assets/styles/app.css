@@ -145,3 +145,24 @@ accordion-btn-show{
     background-color: #BDC6D9;
 }
 
+.listCars-card{
+    width: calc(90vw - 40px);
+} 
+
+@media (orientation: landscape) and (max-height: 768) {
+    .listCars-card{
+        width: calc(45vw - 10px);
+    }   
+}
+
+@media (min-width: 768px) {
+    .listCars-card{
+        width: calc(45vw - 10px);
+    }    
+}
+
+@media (min-width: 1024px) {
+    .listCars-card{
+        width: calc(30vw - 30px);
+    }  
+}

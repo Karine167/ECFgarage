@@ -24,7 +24,7 @@ class SecondHandCarController extends AbstractController
     public function index(SecondHandCarRepository $secondHandCarRepository,InfosRepository $infosRepository, GaleryRepository $galeryRepository,
     Request $request, SessionInterface $sessionInterface, $page): Response
     {   
-        $nbre = 4;
+        $nbre = 6;
         //récupération des données de la précédente recherche
         $sessionInterface->set('previous_url', $request->getUri());
 
