@@ -1,3 +1,6 @@
+body{ 
+    font-size: 1.3em;
+}
 .cantarell-regular, h5, h6, a, button {
     font-family: "Cantarell", sans-serif;
     font-weight: 400;
@@ -37,6 +40,7 @@ header .nav-link {
     margin: 0.2em;
     width: auto;
     height: 4em;
+    font-weight: 700;
 }
 
 footer .nav-link {
@@ -48,7 +52,7 @@ footer .nav-link {
 }
 
 footer {
-    font-size: 0.8em;
+    font-size: 1.1em;
 }
 
 footer, header {
@@ -59,22 +63,28 @@ footer, header {
 .reviews{
     background: #E3E7F1;
     border-radius: 0.5em;
+    width: 90vw;
+    margin: 5vw;
 }
 
 .form-contact, .formLogin{
     background: #E3E7F1;
     border-radius: 0.5em;
 }
-
+.container {
+    width: 90vw;
+    margin: 5vw;
+}
+.accordion {
+    width: 90vw
+}
 .accordion-button{
     background-color: #E3E7F1;
     border: solid 1px #7391C8;
+    font-size: 1.5em;
 }
-.accordion-button:focus{
-    background-color: #BDC6D9;
-    border: solid 1px #7391C8;
-}
-accordion-btn-show{
+
+.accordion-btn-show{
     background-color: #BDC6D9;
     border: solid 1px #7391C8;
 }
@@ -149,7 +159,7 @@ accordion-btn-show{
     width: calc(90vw - 40px);
 } 
 
-@media (orientation: landscape) and (max-height: 768) {
+@media (orientation: landscape) and (max-height: 768) and (max-width: 768) {
     .listCars-card{
         width: calc(45vw - 10px);
     }   
@@ -159,10 +169,27 @@ accordion-btn-show{
     .listCars-card{
         width: calc(45vw - 10px);
     }    
+    body{
+        font-size: 1.1em;
+    }
+    footer {
+        font-size: 1em;
+    }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
     .listCars-card{
         width: calc(30vw - 30px);
-    }  
+    } 
+    body{ 
+        font-size: 1em;
+    }
+    footer {
+        font-size: 0.9em;
+    }
+    .accueil-card{
+        width: 20vw;
+        margin-left: auto;
+    }
+    
 }

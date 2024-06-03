@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="row m-4 ">
+    <div class="row my-3 mx-1">
         {% for message in app.flashes('success') %}
             <div class="alert alert-success mt-4">
                 <h6>{{message}}<h6>
             </div>
         {% endfor %}
     </div>
-    <div class="container mb-5">
+    <div class="container">
         {% include "partials/_accueil.html.twig" %}
     </div>
-    <div class="container my-5 p-5 justify-content-around reviews">
+    <div class="justify-content-around reviews">
         <div class="row flex-row">
             <div class="col-8">
                 <h3> Les commentaires de nos clients : </h3>
