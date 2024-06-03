@@ -24,7 +24,7 @@
                         {% endif %}
                         {% for i in range(1, nbrePage) %}
                             <li class="page-item">
-                                <a class="page-link" href="{{ path('app_advert_list', {page: i, kmMin: kmMin, kmMax: kmMax, priceMin: priceMin, priceMax: priceMax, yearMin: yearMin, yearMax: yearMax})}}">{{i}}</a>
+                                <a class="page-link {% if page==i %} fw-bold fs-5 page-link-bg {% endif %}" href="{{ path('app_advert_list', {page: i, kmMin: kmMin, kmMax: kmMax, priceMin: priceMin, priceMax: priceMax, yearMin: yearMin, yearMax: yearMax})}}">{{i}}</a>
                             </li>
                         {% endfor %}
                         {% if page != nbrePage %}

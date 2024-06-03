@@ -135,3 +135,13 @@ accordion-btn-show{
     top: 20px;
     border-radius: 0.5em;
 }
+.page-link{
+    background-color: #E3E7F1;
+}
+.page-link:hover{
+    background-color: #BDC6D9;
+}
+.page-link-bg {
+    background-color: #BDC6D9;
+}
+
