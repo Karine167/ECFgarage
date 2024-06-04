@@ -21,7 +21,7 @@ use function PHPUnit\Framework\isNull;
 class EmployeeCrudController extends AbstractController 
 {
 
-    #[Route('/show/{id}', methods:['GET'], name: 'show')]
+    #[Route('/show/{id}', name: 'show')]
     #[IsGranted('ROLE_EMPLOYEE')]
     public function showEmployee(int $id, User $employee, InfosRepository $infosRepository, UserRepository $userRepository, Security $security): Response
     {
@@ -58,7 +58,7 @@ class EmployeeCrudController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     #[Route('/create', name: 'create')]
     #[IsGranted('ROLE_EMPLOYEE')]
-    public function edit(Request $request, EntityManagerInterface $em, Security $security, ?User $employee = null, InfosRepository $infosRepository ): Response
+    public function edit(Request $request, EntityManagerInterface $em, Security $security, InfosRepository $infosRepository, ?User $employee = null ): Response
     {
         $page = 'admin/newAdmin/employee_edit.html.twig';
         //recherche du path du logo
