@@ -1,5 +1,5 @@
 body{ 
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 .cantarell-regular, h5, h6, a, button {
     font-family: "Cantarell", sans-serif;
@@ -65,6 +65,7 @@ footer, header {
     border-radius: 0.5em;
     width: 90vw;
     margin: 5vw;
+    font-size: 1.4em;
 }
 
 .form-contact, .formLogin{
@@ -106,7 +107,7 @@ footer, header {
 #formComment .rate input[type="radio"]{
     display: block;
     border: #7391C8;
-} 
+}
 
 .rate:not(:checked)>label{
     float: right;

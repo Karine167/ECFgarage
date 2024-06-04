@@ -43,7 +43,7 @@ class SecondHandCarController extends AbstractController
         $form->handleRequest($request);
         $message="";
         if ( $data->kmMax && $data->kmMin > $data->kmMax){
-            $message = "Le nombre minimal de kilomètres  doit être inférieur au nombre maximal de kilomètres. ";
+            $message = "Le nombre minimal de kilomètres doit être inférieur au nombre maximal de kilomètres. ";
         } 
         if ($data->priceMax && $data->priceMin > $data->priceMax){
             $message .= "Le prix minimal doit être inférieur au prix maximal. ";
@@ -59,7 +59,7 @@ class SecondHandCarController extends AbstractController
             $yearMin = $data->yearMin;
             $yearMax = $data->yearMax;
             $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
-        }else{
+        }else if(!$form->isSubmitted() && !$request->isXmlHttpRequest()){
             // initialisation des valeurs du filtre
             $kmMin = null;
             $kmMax = null;

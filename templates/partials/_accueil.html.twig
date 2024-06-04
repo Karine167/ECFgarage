@@ -7,7 +7,7 @@
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionAccueil">
             <div class="accordion-body">
-                <img src="{{imagePath ~ infos.1.imageName}}" class="card-img-top w-60" alt="Image présentation">
+                <img src="{{imagePath ~ infos.1.imageName}}" class="card-img-top w-60" alt="{{infos.1.imageName}}">
                 {{infos.1.content|raw}}
             </div>
         </div>
@@ -20,7 +20,7 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
             <div class="accordion-body">
-                <img src="{{imagePath ~ infos.7.imageName}}" class="card-img-top w-60" alt="Image présentation">
+                <img src="{{imagePath ~ infos.7.imageName}}" class="card-img-top w-60" alt="{{infos.7.imageName}}">
                 <hr>
                 {{infos.7.content|raw}} <br>
                 <hr>
@@ -38,7 +38,7 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
             <div class="accordion-body">
-                <img src="{{imagePath ~ infos.9.imageName}}" class="card-img-top w-60" alt="Image présentation">
+                <img src="{{imagePath ~ infos.9.imageName}}" class="card-img-top w-60" alt="{{infos.9.imageName}}">
                 <hr>
                 {{infos.9.content|raw}} <br>
                 <hr>
@@ -56,7 +56,7 @@
         </h2>
         <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
             <div class="accordion-body ">
-                <img src="{{imagePath ~ infos.11.imageName}}" class="card-img-top w-60" alt="Image présentation">
+                <img src="{{imagePath ~ infos.11.imageName}}" class="card-img-top w-60" alt="{{infos.11.imageName}}">
                 <hr>
                 {{infos.11.content|raw}} <br>
                 <hr>
@@ -74,7 +74,7 @@
         </h2>
         <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionAccueil">
             <div class="accordion-body">
-                <img src="{{imagePath ~ infos.13.imageName}}" class="card-img-top w-40" alt="Image présentation">
+                <img src="{{imagePath ~ infos.13.imageName}}" class="card-img-top w-40" alt="{{infos.13.imageName}}">
                 <hr>
                 {{infos.13.content|raw}} <br>
                 <a href="{{ path('app_advert_list')}}" class="btn btn-primary">Accéder à la liste</a>
