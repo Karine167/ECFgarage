@@ -59,7 +59,7 @@ class SecondHandCarController extends AbstractController
             $yearMin = $data->yearMin;
             $yearMax = $data->yearMax;
             $secondHandCarsAll = $secondHandCarRepository->findBySearch($data); 
-        }else if(!$form->isSubmitted() && !$request->isXmlHttpRequest()){
+        }else{
             // initialisation des valeurs du filtre
             $kmMin = null;
             $kmMax = null;

@@ -59,7 +59,9 @@ footer, header {
     background : #BDC6D9;
     border-radius: 0.5em;
 }
-
+.photos-list{
+    height: 16em;
+}
 .reviews{
     background: #E3E7F1;
     border-radius: 0.5em;
@@ -192,5 +194,12 @@ footer, header {
         width: 20vw;
         margin-left: auto;
     }
-    
+    .photos-list{
+        height: 13em;
+    }
+}
+@media (min-width: 1400px) {
+    .photos-list{
+        height: 16em;
+    }
 }
