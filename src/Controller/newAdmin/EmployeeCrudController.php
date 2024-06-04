@@ -22,8 +22,11 @@ class EmployeeCrudController extends AbstractController
 {
 
     #[Route('/show/{id}', methods:['GET'], name: 'show')]
+    #[IsGranted('ROLE_EMPLOYEE')]
     public function showEmployee(int $id, User $employee, InfosRepository $infosRepository, UserRepository $userRepository, Security $security): Response
     {
+        $user = $security->getUser();
+
         $page = 'admin/newAdmin/employee_show.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
@@ -34,9 +37,8 @@ class EmployeeCrudController extends AbstractController
 
         //recherche des employés
         $employee = $userRepository->findOneById($id);
-
-        $user = $security->getUser();
-        if ($user && in_array('ROLE_ADMIN', $user->getRoles())  ){
+        
+        if ($user && (in_array('ROLE_ADMIN', $user->getRoles()) || ($user->getUserIdentifier() == $employee->getUserIdentifier()))){
             return $this->render('admin/newAdmin/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
@@ -55,8 +57,8 @@ class EmployeeCrudController extends AbstractController
 
     #[Route('/edit/{id}', name: 'edit')]
     #[Route('/create', name: 'create')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function edit(Request $request, EntityManagerInterface $em, ?User $employee = null, InfosRepository $infosRepository, Security $security): Response
+    #[IsGranted('ROLE_EMPLOYEE')]
+    public function edit(Request $request, EntityManagerInterface $em, Security $security, ?User $employee = null, InfosRepository $infosRepository ): Response
     {
         $page = 'admin/newAdmin/employee_edit.html.twig';
         //recherche du path du logo
@@ -77,7 +79,6 @@ class EmployeeCrudController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($employeeToModify);
             /** @var User $employeeToModify */
             $employeeToModify = $form->getData();
             $em->persist($employeeToModify);

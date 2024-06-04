@@ -21,8 +21,10 @@
         </p>
     </div>
     <div class="card-footer">
-        <a href="{{ path('admin_employee_list')}}" class="btn btn-primary">Liste</a>
         <a href="{{ path('admin_employee_edit',{'id': employee.id})}}" class="btn btn-primary">Editer</a>
-        <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="btn btn-primary">Supprimer</a>
+        {% if is_granted('ROLE_ADMIN')%}
+            <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="btn btn-primary">Supprimer</a>
+            <a href="{{ path('admin_employee_list')}}" class="btn btn-primary">Liste</a>
+        {% endif %}
     </div>
 </div>
