@@ -63,7 +63,6 @@ class HomeController extends AbstractController
     }
 
     #[Route('/newAdmin', name: 'app_newAdmin')]
-    
     public function newAdmin(InfosRepository $infosRepository, Security $security): Response
     {
         //recherche du path du logo
@@ -75,14 +74,14 @@ class HomeController extends AbstractController
 
         $user = $security->getUser();
         if ($user && in_array('ROLE_EMPLOYEE', $user->getRoles())  ){
-            return $this->render('admin/new_dashboard/newDashboard.html.twig', [
+            return $this->render('admin/newAdmin/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
-                'page' => 'admin/new_dashboard/accueilNewDasboard.html.twig',
+                'page' => 'admin/newAdmin/accueilNewDasboard.html.twig',
             ]);
         } else {
-            return $this->render('admin/new_dashboard/newDashboardError.html.twig', [
+            return $this->render('admin/newAdmin/newDashboardError.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,

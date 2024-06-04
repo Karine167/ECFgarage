@@ -24,7 +24,7 @@ class EmployeeCrudController extends AbstractController
     #[Route('/show/{id}', methods:['GET'], name: 'show')]
     public function showEmployee(int $id, User $employee, InfosRepository $infosRepository, UserRepository $userRepository, Security $security): Response
     {
-        $page = 'admin/new_dashboard/employee_show.html.twig';
+        $page = 'admin/newAdmin/employee_show.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -37,7 +37,7 @@ class EmployeeCrudController extends AbstractController
 
         $user = $security->getUser();
         if ($user && in_array('ROLE_ADMIN', $user->getRoles())  ){
-            return $this->render('admin/new_dashboard/newDashboard.html.twig', [
+            return $this->render('admin/newAdmin/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
@@ -45,7 +45,7 @@ class EmployeeCrudController extends AbstractController
                 'employee' => $employee,
             ]);
         } else {
-            return $this->render('admin/new_dashboard/newDashboardError.html.twig', [
+            return $this->render('admin/newAdmin/newDashboardError.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
@@ -58,7 +58,7 @@ class EmployeeCrudController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, EntityManagerInterface $em, ?User $employee = null, InfosRepository $infosRepository, Security $security): Response
     {
-        $page = 'admin/new_dashboard/employee_edit.html.twig';
+        $page = 'admin/newAdmin/employee_edit.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -87,7 +87,7 @@ class EmployeeCrudController extends AbstractController
             return $this->redirectToRoute('admin_employee_list');
         }
 
-        return $this->render('admin/new_dashboard/newDashboard.html.twig', [
+        return $this->render('admin/newAdmin/newDashboard.html.twig', [
             'user' => $user,
             'infos' => $infos,
             'imagePath' => $imagePath,
@@ -102,7 +102,7 @@ class EmployeeCrudController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function delete(EntityManagerInterface $em, User $employee, InfosRepository $infosRepository, Security $security): Response
     {
-        $page = 'admin/new_dashboard/employee_edit.html.twig';
+        $page = 'admin/newAdmin/employee_edit.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -119,7 +119,7 @@ class EmployeeCrudController extends AbstractController
         return $this->redirectToRoute('admin_employee_list');
         }catch (Exception $e){
             $this->addFlash('danger', 'L\'employé n\'a pas pu être supprimé.');
-        return $this->render('admin/new_dashboard/newDashboard.html.twig', [
+        return $this->render('admin/newAdmin/newDashboard.html.twig', [
                     'user' => $user,
                     'infos' => $infos,
                     'imagePath' => $imagePath,

@@ -11,10 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NewDashboardController extends AbstractController
 {
-    #[Route('/new_dashboard/employee/list', name: 'admin_employee_list')]
+    #[Route('/newAdmin/employee/list', name: 'admin_employee_list')]
     public function employeeManagement(InfosRepository $infosRepository,UserRepository $userRepository, Security $security): Response
     {
-        $page = 'admin/new_dashboard/employee.html.twig';
+        $page = 'admin/newAdmin/employee.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $imagePath = $mappingsParams['infos']['uri_prefix'].'/';
@@ -24,10 +24,9 @@ class NewDashboardController extends AbstractController
 
         //recherche des employés
         $employees = $userRepository->findAll();
-        dump($employees);
         $user = $security->getUser();
         if ($user && in_array('ROLE_ADMIN', $user->getRoles())  ){
-            return $this->render('admin/new_dashboard/newDashboard.html.twig', [
+            return $this->render('admin/newAdmin/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
@@ -35,7 +34,7 @@ class NewDashboardController extends AbstractController
                 'employees' => $employees,
             ]);
         } else {
-            return $this->render('admin/new_dashboard/newDashboardError.html.twig', [
+            return $this->render('admin/newAdmin/newDashboardError.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
