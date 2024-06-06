@@ -3,7 +3,7 @@
         <div class="col-7 ps-2"> 
             <a href="/"><img src={{imagePath ~ infos.15.imageName}} alt="Logo du garage Vincent Parrot" height="110"></a>  
         </div>
-        <div class="col-3 ms-5">
+        <div class="col-3 ms-5 col-md-4 ms-md-4">
             <nav class="navbar navbar-expand-md">
                 <div class="container-fluid justify-content-end p-2">
                     <button class="navbar-toggler" height="100" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,6 +25,8 @@
                             {% if (is_granted('ROLE_EMPLOYEE')) %}
                                 <li class="nav-item">
                                     <a class="nav-link btn" href="{{ path('app_admin')}}">Admin</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link btn" href="{{ path('app_newAdmin')}}">New Admin</a>
                                 </li>
                                 <li class="nav-item">
