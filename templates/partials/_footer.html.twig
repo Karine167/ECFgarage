@@ -1,21 +1,21 @@
 <footer class="border-top px-3 mx-3 row ">
     <div class="col-6">
         <div class="scheduleM d-lg-none">
-            <h6>{{infos.3.title}}</h6>
+            <h4>{{infos.3.title|raw}}</h4>
             <p>{{infos.3.content|raw}}</p>
         </div>
         <div class="scheduleD d-none d-lg-block">
-            <h6>{{infos.4.title}}</h6>
+            <h4>{{infos.4.title|raw}}</h4>
             <p>{{infos.4.content|raw}}</p>
         </div>
     </div>
     <div class="col-6">
         <div class="contactM d-lg-none">
-            <h6>{{infos.5.title}}</h6>
+            <h4>{{infos.5.title|raw}}</h4>
             <p>{{infos.5.content|raw}}</p>
         </div>
         <div class="contactD d-none d-lg-block">
-            <h6>{{infos.6.title}}</h6>
+            <h4>{{infos.6.title|raw}}</h4>
             <p>{{infos.6.content|raw}}</p>
         </div> 
         <a href="{{ path('app_contact',{'ref': 'contact' })}}" class="btn btn-primary">Formulaire de contact</a>

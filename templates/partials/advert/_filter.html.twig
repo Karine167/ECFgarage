@@ -1,26 +1,26 @@
 
 {{form_start(form, {attr: {class: 'filter m-2 justify-content-center'}})}}
-    <h4 class=" col-3 mt-3"> Filtrer la recherche : </h4>
+    <h4 class=" col-8 col-md-3 mt-3"> Filtrer la recherche : </h4>
     <div class="row flex-row justify-content-center">
-        <div class="col-3 m-2">
+        <div class="col-md-3 m-2">
             <h5>kilométrage :</h5>
             {{form_row(form.kmMin)}}  
             {{form_row(form.kmMax)}}  
         </div>
-        <div class="col-3 m-2">
+        <div class="col-md-3 m-2">
             <h5>Prix :</h5>
             {{form_row(form.priceMin)}}  
             {{form_row(form.priceMax)}}  
         </div>
-        <div class="col-3 m-2">
+        <div class="col-md-3 m-2">
             <h5>Années :</h5>
             {{form_row(form.yearMin)}}  
             {{form_row(form.yearMax)}}  
         </div>
-        <div class="col-3 m-2">
+        <div class="col-md-3 m-2">
             <button type="submit" class="btn btn-primary btn-filter w-100">Filtrer</button>
         </div>
-        <div class="col-3 m-2">
+        <div class="col-md-3 m-2">
             <a href="{{ path('app_advert_list')}}" class="btn btn-primary initForm w-100">Réinitialiser</a>
         </div>
     </div>

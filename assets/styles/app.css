@@ -1,5 +1,5 @@
 body{ 
-    font-size: 1.4em;
+    font-size: 1em;
 }
 .cantarell-regular, h5, h6, a, button {
     font-family: "Cantarell", sans-serif;
@@ -20,6 +20,7 @@ body{
 .btn-primary{
     background-color: #7391C8;
     border: solid 1.5px #7391C8;
+    font-size: 0.9em;
 }
 .btn-primary:hover{
     background-color: #52688f;
@@ -31,15 +32,15 @@ body {
     color: #071330;
 }
 .navbar-toggler-icon {
-    width:2.5em;
-    height:2.5em;
+    width:2em;
+    height:2em;
 }
 
 header .nav-link {
     border: solid 1.5px #7391C8;
     margin: 0.2em;
     width: auto;
-    height: 4em;
+    height: 3.5em;
     font-weight: 700;
 }
 
@@ -52,22 +53,20 @@ footer .nav-link {
 }
 
 footer {
-    font-size: 1.1em;
+    font-size: 0.8em;
 }
 
 footer, header {
     background : #BDC6D9;
     border-radius: 0.5em;
 }
-.photos-list{
-    height: 16em;
-}
+
 .reviews{
     background: #E3E7F1;
     border-radius: 0.5em;
     width: 90vw;
     margin: 5vw;
-    font-size: 1.4em;
+    font-size: 0.9em;
 }
 
 .form-contact, .formLogin{
@@ -75,8 +74,8 @@ footer, header {
     border-radius: 0.5em;
 }
 .container {
-    width: 90vw;
-    margin: 5vw;
+    width: 88vw;
+    margin: 2vw;
 }
 .accordion {
     width: 90vw
@@ -84,7 +83,7 @@ footer, header {
 .accordion-button{
     background-color: #E3E7F1;
     border: solid 1px #7391C8;
-    font-size: 1.5em;
+    font-size: 1.1em;
 }
 
 .accordion-btn-show{
@@ -93,7 +92,7 @@ footer, header {
 }
 .accordion-body{
     background: #E3E7F1;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .rate {
@@ -113,7 +112,7 @@ footer, header {
 
 .rate:not(:checked)>label{
     float: right;
-    width: 0.8em;
+    width: 0.7em;
     overflow: hidden;
     white-space: nowrap;
     cursor: pointer;
@@ -158,25 +157,44 @@ footer, header {
     background-color: #BDC6D9;
 }
 
-.listCars-card{
-    width: calc(90vw - 40px);
-} 
+@media screen {
+    .photos-list{
+        height: 13em;
+    }
+    .listCars-card{
+        width: calc(95vw - 30px);
+    } 
+}
+@media screen and (min-width: 400px){
+    .photos-list{
+        height: 18em;
+    }
+}
+@media screen and (min-width: 550px){
+    .photos-list{
+        height: 25em;
+    }
+}
 
 @media (orientation: landscape) and (max-height: 768) and (max-width: 768) {
     .listCars-card{
         width: calc(45vw - 10px);
     }   
-}
+} 
 
-@media (min-width: 768px) {
+@media screen and (min-width: 700px) {
     .listCars-card{
-        width: calc(45vw - 10px);
+        width: calc(45vw - 10px); 
     }    
     body{
-        font-size: 1.1em;
-    }
-    footer {
         font-size: 1em;
+    }
+    
+    footer {
+        font-size: 0.8em;
+    }
+    .photos-list{
+        height: 16em;
     }
 }
 
@@ -190,6 +208,9 @@ footer, header {
     footer {
         font-size: 0.9em;
     }
+    .accueil-block{
+        width: 93vw;
+    }
     .accueil-card{
         width: 20vw;
         margin-left: auto;
@@ -201,5 +222,25 @@ footer, header {
 @media (min-width: 1400px) {
     .photos-list{
         height: 16em;
+    }
+}
+@media (min-width: 1500px) {
+    .photos-list{
+        height: 19em;
+    }
+    .accueil-card{
+        width: 18vw;
+        margin-left: auto;
+    }
+}
+@media (min-width: 1800px) {
+    .photos-list{
+        height: 25em;
+    }
+    
+}
+@media (min-width: 2000px) {
+    .photos-list{
+        height: 32em;
     }
 }
