@@ -42,6 +42,7 @@ header .nav-link {
     width: auto;
     height: 3.5em;
     font-weight: 700;
+    background: #E3E7F1;
 }
 
 footer .nav-link {
