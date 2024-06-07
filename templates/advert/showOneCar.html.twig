@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row flex-row">
         {% if (photos|length > 0) %}
-            <div class="col-12">
+            <div class="col-12 col-lg-7">
                 <div id="carouselPhotos" class="carousel slide justify-content-center m-3">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselPhotos" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -42,11 +42,11 @@
                 </div>
             </div>
         {% else %}
-            <div class="col-12">
+            <div class="col-12 col-lg-7">
                 <img src="{{photoPath ~ 'DefaultCar.png'}}" class="card-img-top m-5 w-75" alt="photo de {{secondHandCar.model.brand}} {{secondHandCar.model}} absente">  
             </div>
         {% endif %}
-        <div class="card ms-4 ms-md-5 mt-3 mb-2 col-10 col-md-5">
+        <div class="card ms-4 ms-md-5 ms-lg-2 mt-3 mb-2 col-10 col-md-5 col-lg-2">
             <div class="card-body flex-row">
                 <div class="col">
                     <h3 class="card-title">{{secondHandCar.model.brand}} {{secondHandCar.model}}</h3>
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <div class="card ms-4 ms-md-3 mt-3 mb-2 col-10 col-md-5">
+        <div class="card ms-4 ms-md-3 ms-lg-2 mt-3 mb-2 col-10 col-md-5 col-lg-2">
             <div class="card-body flex-row">
                 <div class="col">
                     {% if (equipments|length > 0) %}
