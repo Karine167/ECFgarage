@@ -17,7 +17,7 @@
                 {% endfor %}
             </div>
             <hr>
-            {{form_start(form)}}
+            {{form_start(form, {'attr': {'auto_complete': 'off'} }) }}
             {{form_row(form.lastname)}}
             {{form_row(form.firstname)}}
             {{form_row(form.email)}}
@@ -28,8 +28,8 @@
             <div class="{{ is_create ? 'd-none': 'd-block'}}">
                 <button class="btn btn-primary col col-4" id="passwordFormBtn" type="button" >Modifier le mot de passe</button>
             </div>
-            <div id="passwordForm" class={{ is_create ? 'd-block': 'd-none'}}>
-                {{form_row(form.password)}}
+            <div id="passwordForm" class={{ is_create ? 'd-block' : 'd-none'}}>
+                {{ form_row(form.password)}} 
             </div>
             <div id="saveForm">
                 {{form_row(form.save)}}

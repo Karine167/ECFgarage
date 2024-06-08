@@ -6,12 +6,14 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'cette adresse email est déjà utilisée')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -31,8 +33,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Assert\PasswordStrength([
-        'minScore' => PasswordStrength::STRENGTH_VERY_STRONG, // Very strong password required
-        'message' => 'Votre mot de passe est trop facile à deviner. Vous devez choisir un mot de passe plus fort.'
+        'minScore' => PasswordStrength::STRENGTH_WEAK, // weak password required
+        'message' => 'Votre mot de passe est trop facile à deviner. Vous devez choisir un mot de passe plus fort, ajouter des chiffres, des lettres minuscules et majuscules, ainsi que des caractères spéciaux.'
     ])]
     private ?string $password = null;
 
@@ -121,7 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): string |null
     {
         return $this->password;
     }

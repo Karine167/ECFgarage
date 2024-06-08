@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -58,7 +59,7 @@ class EmployeeCrudController extends AbstractController
     #[Route('/edit/{id}', name: 'edit')]
     #[Route('/create', name: 'create')]
     #[IsGranted('ROLE_EMPLOYEE')]
-    public function edit(Request $request, EntityManagerInterface $em, Security $security, InfosRepository $infosRepository, ?User $employee = null ): Response
+    public function edit(Request $request, EntityManagerInterface $em, Security $security, InfosRepository $infosRepository, UserPasswordHasherInterface $passwordHasher, ?User $employee = null ): Response
     {
         $page = 'admin/newAdmin/employee_edit.html.twig';
         //recherche du path du logo
@@ -72,7 +73,11 @@ class EmployeeCrudController extends AbstractController
         $user = $security->getUser();
 
         $employeeToModify = $employee ?? new User(); 
-        
+        if (!$isCreate) {
+            $oldPassword = $employee->getPassword();
+            $employeeToModify->setPassword('*******Entrer**votre***mot**de***passe**ici**********');
+        }
+
         $form = $this->createForm(UserType::class, $employeeToModify, [
             'require_password' => $isCreate,
         ]);
@@ -81,6 +86,18 @@ class EmployeeCrudController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $employeeToModify */
             $employeeToModify = $form->getData();
+            $plaintextPassword = $employeeToModify->getPassword();
+            
+            if ((strlen($plaintextPassword) !== 60) && ($plaintextPassword !== '*******Entrer**votre***mot**de***passe**ici**********')){
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $employeeToModify,
+                    $plaintextPassword
+                );
+                $employeeToModify->setPassword($hashedPassword);
+            }else{
+                $employeeToModify->setPassword($oldPassword);
+            }
+            
             $em->persist($employeeToModify);
             $em->flush();
 
