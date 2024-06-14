@@ -3,7 +3,7 @@
 namespace App\Controller\newAdmin;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\UserNewType;
 use App\Repository\InfosRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +27,7 @@ class EmployeeCrudController extends AbstractController
     public function showEmployee(int $id, User $employee, InfosRepository $infosRepository, UserRepository $userRepository, Security $security): Response
     {
         $user = $security->getUser();
-
+        
         $page = 'admin/newAdmin/employee_show.html.twig';
         //recherche du path du logo
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
@@ -36,29 +36,32 @@ class EmployeeCrudController extends AbstractController
         //recherche des infos de l'accueil, du header et du footer 
         $infos = $infosRepository->getInfos();
 
-        //recherche des employés
-        $employee = $userRepository->findOneById($id);
-        
-        if ($user && (in_array('ROLE_ADMIN', $user->getRoles()) || ($user->getUserIdentifier() == $employee->getUserIdentifier()))){
+        if ($this->isGranted('show', $employee)){
+            //recherche de l'employé
+            $employee = $userRepository->findOneById($id);
+            
             return $this->render('admin/newAdmin/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
                 'page' => $page,
                 'employee' => $employee,
-            ]);
+            ]);   
         } else {
-            return $this->render('admin/newAdmin/newDashboardError.html.twig', [
+            $page = 'admin/newAdmin/newDashboardError.html.twig';
+            return $this->render('admin/newAdmin/newDashboard.html.twig', [
                 'user' => $user,
                 'infos' => $infos,
                 'imagePath' => $imagePath,
-            ]);
-        };   
+                'page' => $page,
+                'employee' => $employee,
+            ]);   
+        }
     }
 
-    #[Route('/edit/{id}', name: 'edit')]
+    #[Route('/edit/{id}', name: 'edit', methods:['GET', 'POST'])]
     #[Route('/create', name: 'create')]
-    #[IsGranted('ROLE_EMPLOYEE')]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, EntityManagerInterface $em, Security $security, InfosRepository $infosRepository, UserPasswordHasherInterface $passwordHasher, ?User $employee = null ): Response
     {
         $page = 'admin/newAdmin/employee_edit.html.twig';
@@ -78,11 +81,12 @@ class EmployeeCrudController extends AbstractController
             $employeeToModify->setPassword('*******Entrer**votre***mot**de***passe**ici**********');
         }
 
-        $form = $this->createForm(UserType::class, $employeeToModify, [
+        $form = $this->createForm(UserNewType::class, $employeeToModify, [
             'require_password' => $isCreate,
         ]);
-
+        
         $form->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var User $employeeToModify */
             $employeeToModify = $form->getData();
@@ -102,8 +106,12 @@ class EmployeeCrudController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', $isCreate ? 'L\'employé a bien été créé' : 'L\'employé a bien été modifié');
-            return $this->redirectToRoute('admin_employee_list');
-        }
+            if ($isCreate){
+                return $this->redirectToRoute('admin_employee_list');
+            } else { 
+                return $this->redirectToRoute('app_newAdmin');
+            }
+        } 
 
         return $this->render('admin/newAdmin/newDashboard.html.twig', [
             'user' => $user,
@@ -147,7 +155,5 @@ class EmployeeCrudController extends AbstractController
         }
 
     }
-
-
 
 }

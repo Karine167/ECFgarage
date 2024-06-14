@@ -1,13 +1,13 @@
 {% if is_granted('ROLE_ADMIN') %}
     <div class="card" style="width: auto"> 
-        <div class="row card-header">
-            <div class="col col-9 d-flex">
-                <h2 class="card-title">{{ is_create ? 'Ajouter un employé : ': 'Modifier un employé :'}} </h2>
+            <div class="row card-header">
+                <div class="col col-9 d-flex">
+                    <h2 class="card-title">{{ is_create ? 'Ajouter un employé : ': 'Modifier un employé :'}} </h2>
+                </div>
+                <div class="col col-2 d-flex">
+                    <a href="{{ path('admin_employee_list')}}" class="btn btn-primary">Revenir à la liste</a>
+                </div>
             </div>
-            <div class="col col-2 d-flex">
-                <a href="{{ path('admin_employee_list')}}" class="btn btn-primary">Revenir à la liste</a>
-            </div>
-        </div>
         <div class="card-body">
             <div class="row m-4 ">
                 {% for message in app.flashes('danger') %}

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Callback;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class UserType extends AbstractType
+class UserNewType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

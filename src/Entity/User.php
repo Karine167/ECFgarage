@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     #[Assert\PasswordStrength([
-        'minScore' => PasswordStrength::STRENGTH_WEAK, // weak password required
+        'minScore' => PasswordStrength::STRENGTH_MEDIUM, // weak password required
         'message' => 'Votre mot de passe est trop facile à deviner. Vous devez choisir un mot de passe plus fort, ajouter des chiffres, des lettres minuscules et majuscules, ainsi que des caractères spéciaux.'
     ])]
     private ?string $password = null;

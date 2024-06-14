@@ -8,12 +8,16 @@
         {% else %}
             <div class="row adminMenu justify-content-evenly p-2 m-3">
                 <ul class="navbar-nav d-flex flex-row justify-content-evenly">
-                    <li class="nav-item">
-                        <a class="nav-link btn p-2" aria-current="page" href="{{ path('admin_employee_show',{'id': user.id})}}">Mon profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn p-2" aria-current="page" href="{{ path('admin_employee_list')}}">Employés </a>
-                    </li>
+                    {% if is_granted('show', app.user) %}
+                        <li class="nav-item">
+                            <a class="nav-link btn p-2" aria-current="page" href="{{ path('admin_employee_show',{'id': user.id})}}">Consulter mon profil</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li class="nav-item">
+                            <a class="nav-link btn p-2" aria-current="page" href="{{ path('admin_employee_list')}}">Employés </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link btn p-2" aria-current="page" href="/"> Marques </a>
                     </li>

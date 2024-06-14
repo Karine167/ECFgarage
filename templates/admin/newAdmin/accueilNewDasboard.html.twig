@@ -5,6 +5,18 @@
         <h3 class="card-title"> </h3>
         <hr>
         <p class="card-text">
+        <div class="col col-11 m-4 ">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-success m-4">
+                        <h6>{{message}}<h6>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success m-4">
+                        <h6>{{message}}<h6>
+                    </div>
+                {% endfor %}
+            </div>
             
         </p>
     </div>

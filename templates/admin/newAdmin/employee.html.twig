@@ -1,44 +1,46 @@
-<div class="card" style="width: auto"> 
-    <div class="row card-header">
-        <div class="col col-8 d-flex">
-            <h2> Gestion des employés et des administrateurs</h2>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="card" style="width: auto"> 
+        <div class="row card-header">
+            <div class="col col-8 d-flex">
+                <h2> Gestion des employés et des administrateurs</h2>
+            </div>
+            <div class="col col-2 d-flex">
+                <a href="{{ path('admin_employee_create')}}" class="btn btn-primary">Créer un employé</a>
+            </div>
         </div>
-        <div class="col col-2 d-flex">
-            <a href="{{ path('admin_employee_create')}}" class="btn btn-primary">Créer un employé</a>
+        
+        <div class="row card-body">
+            <div class="col col-11 m-4 ">
+                {% for message in app.flashes('danger') %}
+                    <div class="alert alert-success m-4">
+                        <h6>{{message}}<h6>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success m-4">
+                        <h6>{{message}}<h6>
+                    </div>
+                {% endfor %}
+            </div>
+            <h3 class="card-title">Liste des employés :</h3>
+            <hr>
+            <p class="card-text">
+                {% for employee in employees %}
+                    <div class="d-flex p-3">
+                        <div class="col col-8 justify-content-start">
+                            {{employee.id}} : <em> {{employee|raw}} </em>, <br>
+                            <strong> email : </strong> {{employee.email|raw}}
+                        </div>
+                        <div class="col col-4 flex  ms-3 justify-content-center">
+                            <a href="{{ path('admin_employee_show',{'id': employee.id})}}" class="p-1 btn btn-primary">Consulter</a>
+                            <a href="{{ path('admin_employee_edit',{'id': employee.id})}}" class="p-1 btn btn-primary">Editer</a>
+                            <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="p-1 btn btn-primary">supprimer</a>  
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </p>
         </div>
     </div>
-    
-    <div class="row card-body">
-        <div class="col col-11 m-4 ">
-            {% for message in app.flashes('danger') %}
-                <div class="alert alert-success m-4">
-                    <h6>{{message}}<h6>
-                </div>
-            {% endfor %}
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success m-4">
-                    <h6>{{message}}<h6>
-                </div>
-            {% endfor %}
-        </div>
-        <h3 class="card-title">Liste des employés :</h3>
-        <hr>
-        <p class="card-text">
-            {% for employee in employees %}
-                <div class="d-flex p-3">
-                    <div class="col col-8 justify-content-start">
-                        {{employee.id}} : <em> {{employee|raw}} </em>, <br>
-                        <strong> email : </strong> {{employee.email|raw}}
-                    </div>
-                    <div class="col col-4 flex  ms-3 justify-content-center">
-                        <a href="{{ path('admin_employee_show',{'id': employee.id})}}" class="p-1 btn btn-primary">Consulter</a>
-                        <a href="{{ path('admin_employee_edit',{'id': employee.id})}}" class="p-1 btn btn-primary">Editer</a>
-                        <a href="{{ path('admin_employee_delete',{'id': employee.id})}}" class="p-1 btn btn-primary">supprimer</a>  
-                    </div>
-                </div>
-                <hr>
-            {% endfor %}
-        </p>
-    </div>
-</div>
+{% endif %}
                 
