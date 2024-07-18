@@ -88,10 +88,12 @@ et le site devrait normalement fonctionner.
 # Connection en tant qu'admin :
 email : vparrot@test.com
 Mot de passe : VParrot
+
+(ou bien créer un nouvel administrateur directement dans votre Gestionnaire de Base de données)
 ***
 ***
 ## Améliorations à prévoir
 ***
-L'amélioration la plus importante à prévoir, serait d'améliorer la saisie des annonces des véhicules en regroupant toutes les entrées de données dans un seul formulaire.
-Une autre amélioration à envisager est de modifier le nombre de véhicule présenté par page en fonction de l'appareil (mobile, tablette ou desktop), afin que les pages soient bien remplies dans chaque situation.
-Mettre en cache certaines requêtes pour optimiser les performances du site.
+L'amélioration la plus importante à prévoir, serait d'améliorer la saisie des annonces des véhicules en regroupant toutes les entrées de données dans un seul formulaire (en utilisant EasyAdmin ou bien dans la nouvelle interface d'administration).
+Une autre amélioration à envisager est de poursuivre la mise en place de la nouvelle interface d'administration afin qu'elle soit dans le même thème graphique que le reste du site.
+On pourrait également proposer d'autres critères de tri des annonces, par exemple en sélectionnant la marque du véhicule dans une liste déroulante.
